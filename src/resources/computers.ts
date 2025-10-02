@@ -137,7 +137,7 @@ export interface ComputerCreateParams {
   context_id?: string;
 
   /**
-   * not implemented
+   * TODO: implement
    */
   display?: ComputerCreateParams.Display;
 
@@ -147,14 +147,14 @@ export interface ComputerCreateParams {
   kind?: string;
 
   /**
-   * always true currently
+   * TODO: implement
    */
   stealth?: unknown;
 }
 
 export namespace ComputerCreateParams {
   /**
-   * not implemented
+   * TODO: implement
    */
   export interface Display {
     height?: number;
