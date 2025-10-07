@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'computer/internal/uploads';
-import { toFile } from 'computer/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'tzafon/internal/uploads';
+import { toFile } from 'tzafon/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
