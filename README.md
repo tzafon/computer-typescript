@@ -21,6 +21,8 @@ npm install git+ssh://git@github.com:stainless-sdks/computer-typescript.git
 
 The full API of this library can be found in [api.md](api.md).
 
+### Quick Start
+
 <!-- prettier-ignore -->
 ```js
 import Computer from 'tzafon';
@@ -30,6 +32,68 @@ const client = new Computer({
 });
 
 const response = await client.auth.handleCallback({ code: 'REPLACE_ME', state: 'REPLACE_ME' });
+```
+
+### Computer Automation
+
+This library provides convenient wrappers for computer automation with three usage patterns:
+
+#### Manual Usage
+
+Direct execution of commands on a computer instance:
+
+```ts
+import { Computer, ComputerWrapper } from 'tzafon';
+
+const client = new Computer();
+const wrapper = new ComputerWrapper(client);
+const computer = await wrapper.create({ kind: 'browser' });
+
+await computer.navigate('https://google.com');
+await computer.type('Tzafon AI');
+await computer.click(100, 200);
+await computer.terminate();
+```
+
+#### Context Manager
+
+Auto-termination using try/finally or Symbol.asyncDispose:
+
+```ts
+import { Computer, ComputerWrapper } from 'tzafon';
+
+const client = new Computer();
+const wrapper = new ComputerWrapper(client);
+const computer = await wrapper.create({ kind: 'browser' });
+
+try {
+  await computer.navigate('https://google.com');
+  await computer.type('Tzafon AI');
+  await computer.click(100, 200);
+} finally {
+  await computer[Symbol.asyncDispose](); // Auto-terminates
+}
+```
+
+#### Async (Queued) Usage
+
+Queue actions and execute them in batch:
+
+```ts
+import { Computer, AsyncComputerWrapper } from 'tzafon';
+
+const client = new Computer();
+const wrapper = new AsyncComputerWrapper(client);
+const computer = await wrapper.create({ kind: 'browser' });
+
+computer.navigate('https://google.com');
+computer.type('Tzafon AI');
+computer.click(100, 200);
+
+const result = await computer.execute();
+console.log(`Executed ${result['executed'] || 'all'} actions`);
+
+await computer.terminate();
 ```
 
 ### Request & Response types

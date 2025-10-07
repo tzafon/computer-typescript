@@ -20,3 +20,9 @@ export {
   PermissionDeniedError,
   UnprocessableEntityError,
 } from './core/error';
+export {
+  ComputerInstance,
+  QueuedComputerInstance,
+  ComputerWrapper,
+  AsyncComputerWrapper,
+} from './lib/computer-wrapper';
