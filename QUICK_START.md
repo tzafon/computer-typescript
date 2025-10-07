@@ -28,11 +28,13 @@ await computer.terminate();
 ```
 
 **Pros:**
+
 - ✅ Simple and straightforward
 - ✅ Immediate execution and feedback
 - ✅ Easy to debug
 
 **Cons:**
+
 - ❌ Multiple API calls (one per action)
 - ❌ Manual cleanup required
 
@@ -59,11 +61,13 @@ try {
 ```
 
 **Pros:**
+
 - ✅ Guaranteed cleanup
 - ✅ Error-safe resource management
 - ✅ Follows TypeScript disposal patterns
 
 **Cons:**
+
 - ❌ Requires try/finally block
 - ❌ Multiple API calls (one per action)
 
@@ -91,11 +95,13 @@ await computer.terminate();
 ```
 
 **Pros:**
+
 - ✅ Single batch API call
 - ✅ Better performance
 - ✅ Cleaner syntax (no await on each action)
 
 **Cons:**
+
 - ❌ No immediate feedback per action
 - ❌ All actions execute together (fail together)
 
@@ -105,14 +111,14 @@ await computer.terminate();
 
 All three patterns support these methods:
 
-| Method | Parameters | Description |
-|--------|-----------|-------------|
-| `navigate()` | `url: string` | Navigate to a URL |
-| `type()` | `text: string` | Type text into active element |
-| `click()` | `x: number, y: number` | Click at coordinates |
-| `screenshot()` | - | Capture screenshot |
-| `terminate()` | - | End the session |
-| `keepAlive()` | - | Extend session timeout |
+| Method         | Parameters             | Description                   |
+| -------------- | ---------------------- | ----------------------------- |
+| `navigate()`   | `url: string`          | Navigate to a URL             |
+| `type()`       | `text: string`         | Type text into active element |
+| `click()`      | `x: number, y: number` | Click at coordinates          |
+| `screenshot()` | -                      | Capture screenshot            |
+| `terminate()`  | -                      | End the session               |
+| `keepAlive()`  | -                      | Extend session timeout        |
 
 ## Configuration
 
@@ -120,13 +126,14 @@ All three patterns support these methods:
 
 ```typescript
 const computer = await wrapper.create({
-  kind: 'browser',           // 'browser' | 'desktop' | 'code'
-  context_id: 'my-context',  // Optional context ID
-  display: {                  // Optional display settings
+  kind: 'browser', // 'browser' | 'desktop' | 'code'
+  context_id: 'my-context', // Optional context ID
+  display: {
+    // Optional display settings
     width: 1920,
     height: 1080,
-    scale: 1
-  }
+    scale: 1,
+  },
 });
 ```
 
@@ -135,15 +142,16 @@ const computer = await wrapper.create({
 ```typescript
 const client = new Computer({
   apiKey: process.env.COMPUTER_API_KEY,
-  timeout: 60000,  // 60 seconds
+  timeout: 60000, // 60 seconds
   maxRetries: 3,
-  logLevel: 'debug'
+  logLevel: 'debug',
 });
 ```
 
 ## Best Practices
 
 1. **Always terminate sessions** to avoid resource leaks:
+
    ```typescript
    try {
      // ... your code
@@ -153,6 +161,7 @@ const client = new Computer({
    ```
 
 2. **Use queued execution for performance**:
+
    ```typescript
    // ❌ Slow - 3 API calls
    await computer.navigate(url);
@@ -167,6 +176,7 @@ const client = new Computer({
    ```
 
 3. **Handle errors gracefully**:
+
    ```typescript
    try {
      await computer.navigate('https://example.com');
@@ -180,7 +190,7 @@ const client = new Computer({
 4. **Use environment variables for sensitive data**:
    ```typescript
    const client = new Computer({
-     apiKey: process.env.COMPUTER_API_KEY
+     apiKey: process.env.COMPUTER_API_KEY,
    });
    ```
 
@@ -197,6 +207,7 @@ See the `examples/` directory for complete working examples:
 ### "COMPUTER_API_KEY environment variable is missing"
 
 **Solution:** Set your API key:
+
 ```bash
 export COMPUTER_API_KEY="your-api-key-here"
 ```
@@ -204,6 +215,7 @@ export COMPUTER_API_KEY="your-api-key-here"
 ### "Cannot find module 'tzafon'"
 
 **Solution:** Install the package:
+
 ```bash
 npm install tzafon
 ```
@@ -211,6 +223,7 @@ npm install tzafon
 ### Session timeout errors
 
 **Solution:** Use `keepAlive()` for long-running sessions:
+
 ```typescript
 await computer.keepAlive();
 ```
@@ -224,4 +237,3 @@ await computer.keepAlive();
 ---
 
 **Happy Automating! 🚀**
-

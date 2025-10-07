@@ -9,13 +9,16 @@ This document summarizes the implementation of concise Python-like usage pattern
 ### Files Created/Modified
 
 1. **`src/lib/computer-wrapper.ts`** (NEW)
+
    - Core implementation of wrapper classes
    - Provides `ComputerInstance`, `QueuedComputerInstance`, `ComputerWrapper`, and `AsyncComputerWrapper`
 
 2. **`src/index.ts`** (MODIFIED)
+
    - Added exports for the new wrapper classes
 
 3. **`README.md`** (MODIFIED)
+
    - Added documentation for the three usage patterns
 
 4. **Examples Created:**
@@ -43,6 +46,7 @@ await computer.terminate();
 ```
 
 **Key Features:**
+
 - Each method call executes immediately
 - Returns promises for each action
 - Direct control over execution flow
@@ -68,6 +72,7 @@ try {
 ```
 
 **Key Features:**
+
 - Automatic cleanup using `Symbol.asyncDispose`
 - Guaranteed termination even on errors
 - Compatible with TypeScript 5.2+ disposal patterns
@@ -94,6 +99,7 @@ await computer.terminate();
 ```
 
 **Key Features:**
+
 - Actions are queued without immediate execution
 - Single batch execution of all queued actions
 - Reduces API calls and improves performance
@@ -101,21 +107,25 @@ await computer.terminate();
 ## Class Architecture
 
 ### ComputerInstance
+
 - Wraps a computer ID for direct execution
 - Methods: `navigate()`, `type()`, `click()`, `screenshot()`, `terminate()`, `keepAlive()`
 - Implements `Symbol.asyncDispose` for automatic cleanup
 
 ### QueuedComputerInstance
+
 - Wraps a computer ID for batched execution
 - Methods: `navigate()`, `type()`, `click()`, `screenshot()`, `execute()`, `terminate()`
 - Actions are queued and executed in batch via `execute()`
 - Implements `Symbol.asyncDispose` for automatic cleanup
 
 ### ComputerWrapper
+
 - Factory for creating `ComputerInstance` objects
 - Simplifies the creation pattern
 
 ### AsyncComputerWrapper
+
 - Factory for creating `QueuedComputerInstance` objects
 - Enables the queued execution pattern
 
@@ -133,19 +143,20 @@ await computer.terminate();
 
 ## Comparison with Python API
 
-| Python | TypeScript | Notes |
-|--------|-----------|-------|
-| `Computer()` | `new Computer()` | Standard OOP instantiation |
-| `client.create(kind="browser")` | `wrapper.create({ kind: 'browser' })` | Object params in TypeScript |
-| `computer.navigate(url)` | `computer.navigate(url)` | Direct method call (but async) |
-| `computer.type(text)` | `computer.type(text)` | Direct method call (but async) |
-| `computer.click(x, y)` | `computer.click(x, y)` | Direct method call (but async) |
-| `with client.create()` | `try/finally` with `Symbol.asyncDispose` | TypeScript disposal pattern |
-| `computer.execute()` | `await computer.execute()` | Async in TypeScript |
+| Python                          | TypeScript                               | Notes                          |
+| ------------------------------- | ---------------------------------------- | ------------------------------ |
+| `Computer()`                    | `new Computer()`                         | Standard OOP instantiation     |
+| `client.create(kind="browser")` | `wrapper.create({ kind: 'browser' })`    | Object params in TypeScript    |
+| `computer.navigate(url)`        | `computer.navigate(url)`                 | Direct method call (but async) |
+| `computer.type(text)`           | `computer.type(text)`                    | Direct method call (but async) |
+| `computer.click(x, y)`          | `computer.click(x, y)`                   | Direct method call (but async) |
+| `with client.create()`          | `try/finally` with `Symbol.asyncDispose` | TypeScript disposal pattern    |
+| `computer.execute()`            | `await computer.execute()`               | Async in TypeScript            |
 
 ## Testing
 
 All implementations:
+
 - ✅ Pass TypeScript compilation
 - ✅ Pass ESLint checks
 - ✅ Pass Prettier formatting
@@ -157,18 +168,16 @@ All implementations:
 Potential improvements for future iterations:
 
 1. **Native `using` syntax**: When widely supported, could use TypeScript's `using` keyword:
+
    ```typescript
    await using computer = await wrapper.create({ kind: 'browser' });
    // Auto-terminates at end of scope
    ```
 
 2. **Fluent Builder Pattern**: Enable full method chaining:
+
    ```typescript
-   await computer
-     .navigate('https://google.com')
-     .type('Tzafon AI')
-     .click(100, 200)
-     .terminate();
+   await computer.navigate('https://google.com').type('Tzafon AI').click(100, 200).terminate();
    ```
 
 3. **Event Streaming**: Add support for real-time event streaming:
@@ -181,4 +190,3 @@ Potential improvements for future iterations:
 ## Conclusion
 
 The implementation successfully provides concise, Python-like usage patterns while maintaining TypeScript's type safety and async/await patterns. The API is intuitive, well-documented, and production-ready.
-
