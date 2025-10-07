@@ -1,6 +1,6 @@
 # Computer TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/tzafon.svg?label=npm%20(stable)>)](https://npmjs.org/package/tzafon) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/tzafon)
+[![NPM version](<https://img.shields.io/npm/v/tzafoncomputer.svg?label=npm%20(stable)>)](https://npmjs.org/package/tzafoncomputer) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/tzafoncomputer)
 
 This library provides convenient access to the Computer REST API from server-side TypeScript or JavaScript.
 
@@ -380,7 +380,7 @@ const client = new Computer({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Computer from 'npm:tzafon';
+import Computer from 'npm:tzafoncomputer';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Computer({
