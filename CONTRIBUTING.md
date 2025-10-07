@@ -55,12 +55,12 @@ $ cd computer-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link tzafon
+$ yarn link tzafoncomputer
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global tzafon
+$ pnpm link -—global tzafoncomputer
 ```
 
 ## Running tests
