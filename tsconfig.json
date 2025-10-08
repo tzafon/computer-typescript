@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "tzafon/*": ["./src/*"],
-      "tzafon": ["./src/index.ts"]
+      "tzafonComputer/*": ["./src/*"],
+      "tzafonComputer": ["./src/index.ts"]
     },
     "noEmit": true,
 
