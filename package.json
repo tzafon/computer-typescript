@@ -2,7 +2,7 @@
   "name": "tzafoncomputer",
   "version": "1.1.0",
   "description": "The official TypeScript library for the Computer API",
-  "author": "Computer <simon@tzafon.ai>",
+  "author": "Computer <atul.gavande@tzafon.ai>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
