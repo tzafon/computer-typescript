@@ -6,7 +6,7 @@
  * Demonstrates queuing actions and executing them in batch.
  */
 
-import { Computer, AsyncComputerWrapper } from 'tzafonComputer';
+import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
 
 async function main() {
   const client = new Computer({

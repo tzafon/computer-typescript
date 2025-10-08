@@ -6,7 +6,7 @@
  * Demonstrates direct execution of commands on a computer instance.
  */
 
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 async function main() {
   const client = new Computer({

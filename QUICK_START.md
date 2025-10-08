@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install tzafonComputer
+npm install tzafoncomputer
 # or
 yarn add tzafon
 ```
@@ -15,7 +15,7 @@ yarn add tzafon
 Best for: Simple scripts, debugging, or when you need immediate feedback
 
 ```typescript
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new ComputerWrapper(client);
@@ -45,7 +45,7 @@ await computer.terminate();
 Best for: Production code where resource cleanup is critical
 
 ```typescript
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new ComputerWrapper(client);
@@ -78,7 +78,7 @@ try {
 Best for: Performance-critical applications, reducing API calls
 
 ```typescript
-import { Computer, AsyncComputerWrapper } from 'tzafonComputer';
+import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new AsyncComputerWrapper(client);
@@ -217,7 +217,7 @@ export COMPUTER_API_KEY="your-api-key-here"
 **Solution:** Install the package:
 
 ```bash
-npm install tzafonComputer
+npm install tzafoncomputer
 ```
 
 ### Session timeout errors

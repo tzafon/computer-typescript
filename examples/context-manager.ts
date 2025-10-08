@@ -7,7 +7,7 @@
  * Requires TypeScript 5.2+ and Node.js with Symbol.asyncDispose support.
  */
 
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 async function main() {
   const client = new Computer({
