@@ -33,7 +33,7 @@ This document summarizes the implementation of concise Python-like usage pattern
 Equivalent to Python's direct execution pattern:
 
 ```typescript
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new ComputerWrapper(client);
@@ -56,7 +56,7 @@ await computer.terminate();
 Equivalent to Python's `with` statement:
 
 ```typescript
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new ComputerWrapper(client);
@@ -82,7 +82,7 @@ try {
 Equivalent to Python's queued execution pattern:
 
 ```typescript
-import { Computer, AsyncComputerWrapper } from 'tzafonComputer';
+import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new AsyncComputerWrapper(client);

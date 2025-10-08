@@ -73,7 +73,7 @@ console.log(result.result?.screenshot_url);
 
 ### Manual Mode (All 10 Actions)
 ```typescript
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new ComputerWrapper(client);
@@ -95,7 +95,7 @@ await computer.terminate();
 
 ### Async/Queued Mode (All 10 Actions)
 ```typescript
-import { Computer, AsyncComputerWrapper } from 'tzafonComputer';
+import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new AsyncComputerWrapper(client);

@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "tzafonComputer/*": ["./dist/src/*"],
-      "tzafonComputer": ["./dist/src/index.ts"]
+      "tzafoncomputer/*": ["./dist/src/*"],
+      "tzafoncomputer": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

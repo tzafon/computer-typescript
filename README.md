@@ -15,7 +15,7 @@ npm install git+ssh://git@github.com:stainless-sdks/computer-typescript.git
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install tzafonComputer`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install tzafoncomputer`
 
 ## Usage
 
@@ -25,7 +25,7 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 
 const client = new Computer({
   apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
@@ -43,7 +43,7 @@ This library provides convenient wrappers for computer automation with three usa
 Direct execution of commands on a computer instance:
 
 ```ts
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new ComputerWrapper(client);
@@ -60,7 +60,7 @@ await computer.terminate();
 Auto-termination using try/finally or Symbol.asyncDispose:
 
 ```ts
-import { Computer, ComputerWrapper } from 'tzafonComputer';
+import { Computer, ComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new ComputerWrapper(client);
@@ -80,7 +80,7 @@ try {
 Queue actions and execute them in batch:
 
 ```ts
-import { Computer, AsyncComputerWrapper } from 'tzafonComputer';
+import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
 
 const client = new Computer();
 const wrapper = new AsyncComputerWrapper(client);
@@ -102,7 +102,7 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 
 const client = new Computer({
   apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
@@ -229,7 +229,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 
 const client = new Computer({
   logLevel: 'debug', // Show all log messages
@@ -257,7 +257,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 import pino from 'pino';
 
 const logger = pino();
@@ -326,7 +326,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 import fetch from 'my-fetch';
 
 const client = new Computer({ fetch });
@@ -337,7 +337,7 @@ const client = new Computer({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 
 const client = new Computer({
   fetchOptions: {
@@ -354,7 +354,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -368,7 +368,7 @@ const client = new Computer({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Computer from 'tzafonComputer';
+import Computer from 'tzafoncomputer';
 
 const client = new Computer({
   fetchOptions: {
