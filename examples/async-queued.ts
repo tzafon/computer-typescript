@@ -6,15 +6,14 @@
  * Demonstrates queuing actions and executing them in batch.
  */
 
-import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 async function main() {
   const client = new Computer({
     apiKey: process.env['COMPUTER_API_KEY'],
   });
 
-  const wrapper = new AsyncComputerWrapper(client);
-  const computer = await wrapper.create({ kind: 'browser' });
+  const computer = await client.createAsync({ kind: 'browser' });
 
   computer.navigate('https://google.com');
   computer.type('Tzafon AI');

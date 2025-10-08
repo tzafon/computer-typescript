@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install tzafoncomputer
+npm install tzafon
 # or
 yarn add tzafon
 ```
@@ -15,11 +15,10 @@ yarn add tzafon
 Best for: Simple scripts, debugging, or when you need immediate feedback
 
 ```typescript
-import { Computer, ComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer();
-const wrapper = new ComputerWrapper(client);
-const computer = await wrapper.create({ kind: 'browser' });
+const computer = await client.create({ kind: 'browser' });
 
 await computer.navigate('https://google.com');
 await computer.type('Tzafon AI');
@@ -45,11 +44,10 @@ await computer.terminate();
 Best for: Production code where resource cleanup is critical
 
 ```typescript
-import { Computer, ComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer();
-const wrapper = new ComputerWrapper(client);
-const computer = await wrapper.create({ kind: 'browser' });
+const computer = await client.create({ kind: 'browser' });
 
 try {
   await computer.navigate('https://google.com');
@@ -78,11 +76,10 @@ try {
 Best for: Performance-critical applications, reducing API calls
 
 ```typescript
-import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer();
-const wrapper = new AsyncComputerWrapper(client);
-const computer = await wrapper.create({ kind: 'browser' });
+const computer = await client.createAsync({ kind: 'browser' });
 
 computer.navigate('https://google.com');
 computer.type('Tzafon AI');
@@ -217,7 +214,7 @@ export COMPUTER_API_KEY="your-api-key-here"
 **Solution:** Install the package:
 
 ```bash
-npm install tzafoncomputer
+npm install tzafon
 ```
 
 ### Session timeout errors

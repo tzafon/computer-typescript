@@ -7,18 +7,16 @@
  * Requires TypeScript 5.2+ and Node.js with Symbol.asyncDispose support.
  */
 
-import { Computer, ComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 async function main() {
   const client = new Computer({
     apiKey: process.env['COMPUTER_API_KEY'],
   });
 
-  const wrapper = new ComputerWrapper(client);
-
   // Using Symbol.asyncDispose for automatic cleanup
   {
-    const computer = await wrapper.create({ kind: 'browser' });
+    const computer = await client.create({ kind: 'browser' });
     try {
       await computer.navigate('https://google.com');
       await computer.type('Tzafon AI');

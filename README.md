@@ -42,11 +42,10 @@ This library provides convenient wrappers for computer automation with three usa
 Direct execution of commands on a computer instance:
 
 ```ts
-import { Computer, ComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer();
-const wrapper = new ComputerWrapper(client);
-const computer = await wrapper.create({ kind: 'browser' });
+const computer = await client.create({ kind: 'browser' });
 
 await computer.navigate('https://google.com');
 await computer.type('Tzafon AI');
@@ -59,11 +58,10 @@ await computer.terminate();
 Auto-termination using try/finally or Symbol.asyncDispose:
 
 ```ts
-import { Computer, ComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer();
-const wrapper = new ComputerWrapper(client);
-const computer = await wrapper.create({ kind: 'browser' });
+const computer = await client.create({ kind: 'browser' });
 
 try {
   await computer.navigate('https://google.com');
@@ -79,11 +77,10 @@ try {
 Queue actions and execute them in batch:
 
 ```ts
-import { Computer, AsyncComputerWrapper } from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer();
-const wrapper = new AsyncComputerWrapper(client);
-const computer = await wrapper.create({ kind: 'browser' });
+const computer = await client.createAsync({ kind: 'browser' });
 
 computer.navigate('https://google.com');
 computer.type('Tzafon AI');
