@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.0 (2025-10-08)
+
+Full Changelog: [v1.0.1...v1.1.0](https://github.com/atulgavandetzafon/computer-typescript/compare/v1.0.1...v1.1.0)
+
+### Features
+
+* **api:** manual updates ([1a67d6a](https://github.com/atulgavandetzafon/computer-typescript/commit/1a67d6a24081ad120e904af305e09175847a1be5))
+* **api:** manual updates ([52807e6](https://github.com/atulgavandetzafon/computer-typescript/commit/52807e65eaec439452a2598be5ecaa0d681edaf2))
+
+
+### Chores
+
+* update SDK settings ([eafae37](https://github.com/atulgavandetzafon/computer-typescript/commit/eafae37c2682335e4aba826abe0e832e8747b705))
+
 ## 1.0.1 (2025-10-08)
 
 Full Changelog: [v0.0.1...v1.0.1](https://github.com/atulgavandetzafon/computer-typescript/compare/v0.0.1...v1.0.1)
