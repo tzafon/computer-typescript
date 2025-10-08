@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0 (2025-10-08)
+
+Full Changelog: [v1.2.0...v1.3.0](https://github.com/atulgavandetzafon/computer-typescript/compare/v1.2.0...v1.3.0)
+
+### Features
+
+* **api:** manual updates ([e87e2b0](https://github.com/atulgavandetzafon/computer-typescript/commit/e87e2b06a8edb3ac745c91f70da0393a0f777d2b))
+
 ## 1.2.0 (2025-10-08)
 
 Full Changelog: [v1.1.0...v1.2.0](https://github.com/atulgavandetzafon/computer-typescript/compare/v1.1.0...v1.2.0)
