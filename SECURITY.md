@@ -20,7 +20,7 @@ or products provided by Computer, please follow the respective company's securit
 
 ### Computer Terms and Policies
 
-Please contact simon@tzafon.ai for any questions or concerns regarding the security of our services.
+Please contact atul.gavande@tzafon.ai for any questions or concerns regarding the security of our services.
 
 ---
 
