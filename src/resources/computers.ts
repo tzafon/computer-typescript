@@ -25,15 +25,7 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a mouse click at specified coordinates
-   */
-  click(id: string, params: ComputerClickParams, options?: RequestOptions): APIPromise<ActionResult> {
-    const { body } = params;
-    return this._client.post(path`/computers/${id}/click`, { body: body, ...options });
-  }
-
-  /**
-   * Execute a single action (screenshot, click, type, navigate, etc.)
+   * Execute a single action (screenshot, click, type, navigate, )
    */
   executeAction(
     id: string,
@@ -82,13 +74,6 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Capture a screenshot of the current screen
-   */
-  takeScreenshot(id: string, options?: RequestOptions): APIPromise<ActionResult> {
-    return this._client.post(path`/computers/${id}/screenshot`, options);
-  }
-
-  /**
    * Terminate and clean up a computer instance
    */
   terminate(id: string, options?: RequestOptions): APIPromise<void> {
@@ -96,14 +81,6 @@ export class Computers extends APIResource {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
-  }
-
-  /**
-   * Send keyboard input to the active element
-   */
-  typeText(id: string, params: ComputerTypeTextParams, options?: RequestOptions): APIPromise<ActionResult> {
-    const { body } = params;
-    return this._client.post(path`/computers/${id}/type`, { body: body, ...options });
   }
 }
 
@@ -142,7 +119,7 @@ export interface ComputerCreateParams {
   display?: ComputerCreateParams.Display;
 
   /**
-   * "browser"|"desktop"|"code" (we wire browser + OS now)
+   * "browser"|"desktop"|"code" etc
    */
   kind?: string;
 
@@ -150,6 +127,8 @@ export interface ComputerCreateParams {
    * TODO: implement
    */
   stealth?: unknown;
+
+  timeout_seconds?: number;
 }
 
 export namespace ComputerCreateParams {
@@ -165,10 +144,6 @@ export namespace ComputerCreateParams {
   }
 }
 
-export interface ComputerClickParams {
-  body: unknown;
-}
-
 export interface ComputerExecuteActionParams {
   body: unknown;
 }
@@ -181,10 +156,6 @@ export interface ComputerNavigateParams {
   body: unknown;
 }
 
-export interface ComputerTypeTextParams {
-  body: unknown;
-}
-
 export declare namespace Computers {
   export {
     type ActionResult as ActionResult,
@@ -192,10 +163,8 @@ export declare namespace Computers {
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
     type ComputerCreateParams as ComputerCreateParams,
-    type ComputerClickParams as ComputerClickParams,
     type ComputerExecuteActionParams as ComputerExecuteActionParams,
     type ComputerExecuteBatchParams as ComputerExecuteBatchParams,
     type ComputerNavigateParams as ComputerNavigateParams,
-    type ComputerTypeTextParams as ComputerTypeTextParams,
   };
 }

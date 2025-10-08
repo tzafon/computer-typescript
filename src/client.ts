@@ -16,16 +16,9 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  Auth,
-  AuthHandleCallbackParams,
-  AuthHandleCallbackResponse,
-  AuthLogoutResponse,
-  AuthRetrieveCurrentUserResponse,
-} from './resources/auth';
+import { Auth } from './resources/auth';
 import {
   ActionResult,
-  ComputerClickParams,
   ComputerCreateParams,
   ComputerExecuteActionParams,
   ComputerExecuteBatchParams,
@@ -33,7 +26,6 @@ import {
   ComputerKeepAliveResponse,
   ComputerNavigateParams,
   ComputerResponse,
-  ComputerTypeTextParams,
   Computers,
 } from './resources/computers';
 import { type Fetch } from './internal/builtin-types';
@@ -226,7 +218,7 @@ export class Computer {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: `Bearer ${this.apiKey}` }]);
+    return buildHeaders([{ Authorization: this.apiKey }]);
   }
 
   /**
@@ -743,13 +735,7 @@ Computer.Computers = Computers;
 export declare namespace Computer {
   export type RequestOptions = Opts.RequestOptions;
 
-  export {
-    Auth as Auth,
-    type AuthHandleCallbackResponse as AuthHandleCallbackResponse,
-    type AuthLogoutResponse as AuthLogoutResponse,
-    type AuthRetrieveCurrentUserResponse as AuthRetrieveCurrentUserResponse,
-    type AuthHandleCallbackParams as AuthHandleCallbackParams,
-  };
+  export { Auth as Auth };
 
   export {
     Computers as Computers,
@@ -758,10 +744,8 @@ export declare namespace Computer {
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
     type ComputerCreateParams as ComputerCreateParams,
-    type ComputerClickParams as ComputerClickParams,
     type ComputerExecuteActionParams as ComputerExecuteActionParams,
     type ComputerExecuteBatchParams as ComputerExecuteBatchParams,
     type ComputerNavigateParams as ComputerNavigateParams,
-    type ComputerTypeTextParams as ComputerTypeTextParams,
   };
 }
