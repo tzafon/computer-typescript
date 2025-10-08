@@ -1,12 +1,12 @@
 {
-  "name": "tzafonComputer",
-  "version": "0.0.1",
+  "name": "tzafoncomputer",
+  "version": "1.0.1",
   "description": "The official TypeScript library for the Computer API",
   "author": "Computer <api@tzafon.ai>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/computer-typescript",
+  "repository": "github:atulgavandetzafon/computer-typescript",
   "license": "MIT",
   "packageManager": "yarn@1.22.22",
   "files": [
