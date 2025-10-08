@@ -1,6 +1,6 @@
 # Computer TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/tzafon.svg?label=npm%20(stable)>)](https://npmjs.org/package/tzafon) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/tzafon)
+[![NPM version](<https://img.shields.io/npm/v/tzafoncomputer.svg?label=npm%20(stable)>)](https://npmjs.org/package/tzafoncomputer) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/tzafoncomputer)
 
 This library provides convenient access to the Computer REST API from server-side TypeScript or JavaScript.
 
@@ -11,11 +11,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/computer-typescript.git
+npm install tzafoncomputer
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install tzafoncomputer`
 
 ## Usage
 
@@ -380,7 +377,7 @@ const client = new Computer({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Computer from 'npm:tzafon';
+import Computer from 'npm:tzafoncomputer';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Computer({
@@ -402,7 +399,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/computer-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/atulgavandetzafon/computer-typescript/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

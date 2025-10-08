@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'tzafon/internal/to-file';
-import { toFile } from 'tzafon/core/uploads';
+import type { ResponseLike } from 'tzafoncomputer/internal/to-file';
+import { toFile } from 'tzafoncomputer/core/uploads';
 import { File } from 'node:buffer';
 
 class MyClass {
@@ -97,7 +97,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('tzafon/core/uploads');
+    const uploads = await import('tzafoncomputer/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(
