@@ -1,6 +1,6 @@
 {
   "name": "tzafoncomputer",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "The official TypeScript library for the Computer API",
   "author": "Computer <api@tzafon.ai>",
   "types": "dist/index.d.ts",
