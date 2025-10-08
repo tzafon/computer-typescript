@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^tzafoncomputer(/.*)?',
+              regex: '^tzafon(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],
