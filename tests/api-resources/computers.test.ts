@@ -25,7 +25,13 @@ describe('resource computers', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.computers.create(
-        { context_id: 'context_id', display: { height: 0, scale: 0, width: 0 }, kind: 'kind', stealth: {} },
+        {
+          context_id: 'context_id',
+          display: { height: 0, scale: 0, width: 0 },
+          kind: 'kind',
+          stealth: {},
+          timeout_seconds: 0,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Computer.NotFoundError);
@@ -44,8 +50,8 @@ describe('resource computers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('click: only required params', async () => {
-    const responsePromise = client.computers.click('id', { body: {} });
+  test.skip('list', async () => {
+    const responsePromise = client.computers.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,11 +59,6 @@ describe('resource computers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('click: required and optional params', async () => {
-    const response = await client.computers.click('id', { body: {} });
   });
 
   // Prism tests are disabled
@@ -136,18 +137,6 @@ describe('resource computers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('takeScreenshot', async () => {
-    const responsePromise = client.computers.takeScreenshot('id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
   test.skip('terminate', async () => {
     const responsePromise = client.computers.terminate('id');
     const rawResponse = await responsePromise.asResponse();
@@ -157,22 +146,5 @@ describe('resource computers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('typeText: only required params', async () => {
-    const responsePromise = client.computers.typeText('id', { body: {} });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('typeText: required and optional params', async () => {
-    const response = await client.computers.typeText('id', { body: {} });
   });
 });

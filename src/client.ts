@@ -17,23 +17,15 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
-  Auth,
-  AuthHandleCallbackParams,
-  AuthHandleCallbackResponse,
-  AuthLogoutResponse,
-  AuthRetrieveCurrentUserResponse,
-} from './resources/auth';
-import {
   ActionResult,
-  ComputerClickParams,
   ComputerCreateParams,
   ComputerExecuteActionParams,
   ComputerExecuteBatchParams,
   ComputerExecuteBatchResponse,
   ComputerKeepAliveResponse,
+  ComputerListResponse,
   ComputerNavigateParams,
   ComputerResponse,
-  ComputerTypeTextParams,
   Computers,
 } from './resources/computers';
 import { type Fetch } from './internal/builtin-types';
@@ -733,35 +725,24 @@ export class Computer {
 
   static toFile = Uploads.toFile;
 
-  auth: API.Auth = new API.Auth(this);
   computers: API.Computers = new API.Computers(this);
 }
 
-Computer.Auth = Auth;
 Computer.Computers = Computers;
 
 export declare namespace Computer {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Auth as Auth,
-    type AuthHandleCallbackResponse as AuthHandleCallbackResponse,
-    type AuthLogoutResponse as AuthLogoutResponse,
-    type AuthRetrieveCurrentUserResponse as AuthRetrieveCurrentUserResponse,
-    type AuthHandleCallbackParams as AuthHandleCallbackParams,
-  };
-
-  export {
     Computers as Computers,
     type ActionResult as ActionResult,
     type ComputerResponse as ComputerResponse,
+    type ComputerListResponse as ComputerListResponse,
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
     type ComputerCreateParams as ComputerCreateParams,
-    type ComputerClickParams as ComputerClickParams,
     type ComputerExecuteActionParams as ComputerExecuteActionParams,
     type ComputerExecuteBatchParams as ComputerExecuteBatchParams,
     type ComputerNavigateParams as ComputerNavigateParams,
-    type ComputerTypeTextParams as ComputerTypeTextParams,
   };
 }
