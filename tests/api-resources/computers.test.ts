@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer({
   apiKey: 'My API Key',

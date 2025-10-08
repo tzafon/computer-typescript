@@ -1,6 +1,6 @@
 # Computer TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/tzafoncomputer.svg?label=npm%20(stable)>)](https://npmjs.org/package/tzafoncomputer) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/tzafoncomputer)
+[![NPM version](<https://img.shields.io/npm/v/tzafon.svg?label=npm%20(stable)>)](https://npmjs.org/package/tzafon) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/tzafon)
 
 This library provides convenient access to the Computer REST API from server-side TypeScript or JavaScript.
 
@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install tzafoncomputer
+npm install tzafon
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer({
   apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
@@ -101,7 +101,7 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer({
   apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
@@ -226,7 +226,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer({
   logLevel: 'debug', // Show all log messages
@@ -254,7 +254,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 import pino from 'pino';
 
 const logger = pino();
@@ -323,7 +323,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 import fetch from 'my-fetch';
 
 const client = new Computer({ fetch });
@@ -334,7 +334,7 @@ const client = new Computer({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer({
   fetchOptions: {
@@ -351,7 +351,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -365,7 +365,7 @@ const client = new Computer({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Computer from 'tzafoncomputer';
+import Computer from 'tzafon';
 
 const client = new Computer({
   fetchOptions: {
@@ -377,7 +377,7 @@ const client = new Computer({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Computer from 'npm:tzafoncomputer';
+import Computer from 'npm:tzafon';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new Computer({
