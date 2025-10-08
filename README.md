@@ -28,7 +28,7 @@ const client = new Computer({
   apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
 });
 
-const computerResponse = await client.computers.create();
+const computerResponse = await client.computers.create({ kind: 'browser' });
 
 console.log(computerResponse.id);
 ```
@@ -107,7 +107,8 @@ const client = new Computer({
   apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
 });
 
-const computerResponse: Computer.ComputerResponse = await client.computers.create();
+const params: Computer.ComputerCreateParams = { kind: 'browser' };
+const computerResponse: Computer.ComputerResponse = await client.computers.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -120,7 +121,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const computerResponse = await client.computers.create().catch(async (err) => {
+const computerResponse = await client.computers.create({ kind: 'browser' }).catch(async (err) => {
   if (err instanceof Computer.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -160,7 +161,7 @@ const client = new Computer({
 });
 
 // Or, configure per-request:
-await client.computers.create({
+await client.computers.create({ kind: 'browser' }, {
   maxRetries: 5,
 });
 ```
@@ -177,7 +178,7 @@ const client = new Computer({
 });
 
 // Override per-request:
-await client.computers.create({
+await client.computers.create({ kind: 'browser' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -200,11 +201,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Computer();
 
-const response = await client.computers.create().asResponse();
+const response = await client.computers.create({ kind: 'browser' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: computerResponse, response: raw } = await client.computers.create().withResponse();
+const { data: computerResponse, response: raw } = await client.computers
+  .create({ kind: 'browser' })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(computerResponse.id);
 ```

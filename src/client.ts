@@ -16,7 +16,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Auth } from './resources/auth';
 import {
   ActionResult,
   ComputerCreateParams,
@@ -24,6 +23,7 @@ import {
   ComputerExecuteBatchParams,
   ComputerExecuteBatchResponse,
   ComputerKeepAliveResponse,
+  ComputerListResponse,
   ComputerNavigateParams,
   ComputerResponse,
   Computers,
@@ -725,22 +725,19 @@ export class Computer {
 
   static toFile = Uploads.toFile;
 
-  auth: API.Auth = new API.Auth(this);
   computers: API.Computers = new API.Computers(this);
 }
 
-Computer.Auth = Auth;
 Computer.Computers = Computers;
 
 export declare namespace Computer {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Auth as Auth };
-
   export {
     Computers as Computers,
     type ActionResult as ActionResult,
     type ComputerResponse as ComputerResponse,
+    type ComputerListResponse as ComputerListResponse,
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
     type ComputerCreateParams as ComputerCreateParams,

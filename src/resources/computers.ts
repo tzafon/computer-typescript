@@ -25,6 +25,13 @@ export class Computers extends APIResource {
   }
 
   /**
+   * List all active computers for the user's organization
+   */
+  list(options?: RequestOptions): APIPromise<ComputerListResponse> {
+    return this._client.get('/computers', options);
+  }
+
+  /**
    * Execute a single action (screenshot, click, type, navigate, )
    */
   executeAction(
@@ -106,6 +113,8 @@ export interface ComputerResponse {
   type?: string;
 }
 
+export type ComputerListResponse = Array<ComputerResponse>;
+
 export type ComputerExecuteBatchResponse = { [key: string]: unknown };
 
 export type ComputerKeepAliveResponse = { [key: string]: unknown };
@@ -160,6 +169,7 @@ export declare namespace Computers {
   export {
     type ActionResult as ActionResult,
     type ComputerResponse as ComputerResponse,
+    type ComputerListResponse as ComputerListResponse,
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
     type ComputerCreateParams as ComputerCreateParams,
