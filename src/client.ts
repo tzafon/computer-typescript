@@ -43,7 +43,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['COMPUTER_API_KEY'].
+   * Defaults to process.env['TZAFON_API_KEY'].
    */
   apiKey?: string | undefined;
 
@@ -137,7 +137,7 @@ export class Computer {
   /**
    * API Client for interfacing with the Computer API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['COMPUTER_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['TZAFON_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['COMPUTER_BASE_URL'] ?? https://v2.tzafon.ai/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -148,12 +148,12 @@ export class Computer {
    */
   constructor({
     baseURL = readEnv('COMPUTER_BASE_URL'),
-    apiKey = readEnv('COMPUTER_API_KEY'),
+    apiKey = readEnv('TZAFON_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.ComputerError(
-        "The COMPUTER_API_KEY environment variable is missing or empty; either provide it, or instantiate the Computer client with an apiKey option, like new Computer({ apiKey: 'My API Key' }).",
+        "The TZAFON_API_KEY environment variable is missing or empty; either provide it, or instantiate the Computer client with an apiKey option, like new Computer({ apiKey: 'My API Key' }).",
       );
     }
 
