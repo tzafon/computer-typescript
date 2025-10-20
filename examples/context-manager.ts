@@ -11,7 +11,7 @@ import Computer from 'tzafon';
 
 async function main() {
   const client = new Computer({
-    apiKey: process.env['COMPUTER_API_KEY'],
+    apiKey: process.env['TZAFON_API_KEY'],
   });
 
   // Using Symbol.asyncDispose for automatic cleanup

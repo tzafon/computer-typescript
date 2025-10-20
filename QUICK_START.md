@@ -138,7 +138,7 @@ const computer = await wrapper.create({
 
 ```typescript
 const client = new Computer({
-  apiKey: process.env.COMPUTER_API_KEY,
+  apiKey: process.env.TZAFON_API_KEY,
   timeout: 60000, // 60 seconds
   maxRetries: 3,
   logLevel: 'debug',
@@ -187,7 +187,7 @@ const client = new Computer({
 4. **Use environment variables for sensitive data**:
    ```typescript
    const client = new Computer({
-     apiKey: process.env.COMPUTER_API_KEY,
+     apiKey: process.env.TZAFON_API_KEY,
    });
    ```
 
@@ -201,12 +201,12 @@ See the `examples/` directory for complete working examples:
 
 ## Troubleshooting
 
-### "COMPUTER_API_KEY environment variable is missing"
+### "TZAFON_API_KEY environment variable is missing"
 
 **Solution:** Set your API key:
 
 ```bash
-export COMPUTER_API_KEY="your-api-key-here"
+export TZAFON_API_KEY="your-api-key-here"
 ```
 
 ### "Cannot find module 'tzafon'"

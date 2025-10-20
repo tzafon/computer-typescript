@@ -11,7 +11,7 @@ async function test() {
   console.log('🧪 Testing Computer Wrapper Implementations\n');
 
   const client = new Computer({
-    apiKey: process.env.COMPUTER_API_KEY || 'test-key',
+    apiKey: process.env.TZAFON_API_KEY || 'test-key',
   });
 
   try {
@@ -78,7 +78,7 @@ async function test() {
     console.log('✅ All tests passed!');
   } catch (error: any) {
     console.error('\n❌ Test failed:', error.message);
-    console.log('\n💡 Tip: Make sure COMPUTER_API_KEY is set and the API is accessible');
+    console.log('\n💡 Tip: Make sure TZAFON_API_KEY is set and the API is accessible');
     process.exit(1);
   }
 }

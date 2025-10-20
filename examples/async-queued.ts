@@ -10,7 +10,7 @@ import Computer from 'tzafon';
 
 async function main() {
   const client = new Computer({
-    apiKey: process.env['COMPUTER_API_KEY'],
+    apiKey: process.env['TZAFON_API_KEY'],
   });
 
   const computer = await client.createAsync({ kind: 'browser' });
