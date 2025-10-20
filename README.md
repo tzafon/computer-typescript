@@ -25,7 +25,7 @@ The full API of this library can be found in [api.md](api.md).
 import Computer from 'tzafon';
 
 const client = new Computer({
-  apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['TZAFON_API_KEY'], // This is the default and can be omitted
 });
 
 const computerResponse = await client.computers.create({ kind: 'browser' });
@@ -101,7 +101,7 @@ This library includes TypeScript definitions for all request params and response
 import Computer from 'tzafon';
 
 const client = new Computer({
-  apiKey: process.env['COMPUTER_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['TZAFON_API_KEY'], // This is the default and can be omitted
 });
 
 const params: Computer.ComputerCreateParams = { kind: 'browser' };
