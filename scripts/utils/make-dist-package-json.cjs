@@ -18,4 +18,7 @@ delete pkgJson.scripts.prepack;
 delete pkgJson.scripts.prepublishOnly;
 delete pkgJson.scripts.prepare;
 
+// Explicitly set the readme field so npm recognizes it
+pkgJson.readme = 'README.md';
+
 console.log(JSON.stringify(pkgJson, null, 2));

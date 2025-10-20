@@ -1,12 +1,12 @@
-# Computer TypeScript API Library
+# Tzafon TypeScript SDK
 
 [![NPM version](<https://img.shields.io/npm/v/tzafon.svg?label=npm%20(stable)>)](https://npmjs.org/package/tzafon) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/tzafon)
 
-This library provides convenient access to the Computer REST API from server-side TypeScript or JavaScript.
+**Programmatic control of browsers and desktops in minutes. Full stealth. Lightning quick.**
 
-The REST API documentation can be found on [docs.tzafon.ai](http://docs.tzafon.ai). The full API of this library can be found in [api.md](api.md).
+This library provides convenient access to the Tzafon Computer API from server-side TypeScript or JavaScript. Control browsers and desktops programmatically with a simple, intuitive API.
 
-It is generated with [Stainless](https://www.stainless.com/).
+📚 **[Full Documentation](https://docs.tzafon.ai/overview)** | 🔧 **[API Reference](api.md)**
 
 ## Installation
 
@@ -14,24 +14,30 @@ It is generated with [Stainless](https://www.stainless.com/).
 npm install tzafon
 ```
 
-## Usage
+## Quick Start
 
-The full API of this library can be found in [api.md](api.md).
-
-### Quick Start
-
-<!-- prettier-ignore -->
-```js
+```typescript
 import Computer from 'tzafon';
 
 const client = new Computer({
   apiKey: process.env['TZAFON_API_KEY'], // This is the default and can be omitted
 });
 
-const computerResponse = await client.computers.create({ kind: 'browser' });
+const computer = await client.create({ kind: 'browser' });
 
-console.log(computerResponse.id);
+await computer.navigate('https://google.com');
+await computer.type('Tzafon AI');
+await computer.click(100, 200);
+await computer.screenshot();
+
+await computer.terminate();
 ```
+
+For more examples and detailed usage, visit the [Tzafon SDK Documentation](https://docs.tzafon.ai/overview).
+
+## Usage
+
+The full API of this library can be found in [api.md](api.md).
 
 ### Computer Automation
 
