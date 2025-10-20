@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 (2025-10-20)
+
+Full Changelog: [v1.4.0...v1.5.0](https://github.com/atulgavandetzafon/computer-typescript/compare/v1.4.0...v1.5.0)
+
+### Features
+
+* Updated to use tzafon_api_key ([307997a](https://github.com/atulgavandetzafon/computer-typescript/commit/307997a6db7c23c627a07a99962938227e43b36f))
+
 ## 1.4.0 (2025-10-20)
 
 Full Changelog: [v1.3.1...v1.4.0](https://github.com/atulgavandetzafon/computer-typescript/compare/v1.3.1...v1.4.0)
