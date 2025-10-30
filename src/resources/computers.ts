@@ -8,7 +8,9 @@ import { path } from '../internal/utils/path';
 
 export class Computers extends APIResource {
   /**
-   * Create a new browser or desktop automation session
+   * Create a new browser or desktop automation session with configurable timeout.
+   * Returns endpoints for executing actions, streaming events, and viewing
+   * screencast.
    */
   create(
     body: ComputerCreateParams | null | undefined = {},
@@ -18,7 +20,7 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Get the current status of a computer instance
+   * Get the current status and metadata of a computer instance
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<ComputerResponse> {
     return this._client.get(path`/computers/${id}`, options);
@@ -32,7 +34,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Execute a single action (screenshot, click, type, navigate, )
+   * Execute a single action such as screenshot, click, type, navigate, scroll, debug
+   * or other computer use actions
    */
   executeAction(
     id: string,
@@ -56,7 +59,7 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Extend the timeout for a computer session
+   * Extend the timeout for a computer session and verify it is still running
    */
   keepAlive(id: string, options?: RequestOptions): APIPromise<ComputerKeepAliveResponse> {
     return this._client.post(path`/computers/${id}/keepalive`, options);
@@ -81,7 +84,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Terminate and clean up a computer instance
+   * Terminate and clean up a computer instance, stopping the session and recording
+   * metrics
    */
   terminate(id: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/computers/${id}`, {
@@ -93,6 +97,8 @@ export class Computers extends APIResource {
 
 export interface ActionResult {
   error_message?: string;
+
+  request_id?: string;
 
   result?: { [key: string]: unknown };
 
