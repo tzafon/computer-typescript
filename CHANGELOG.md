@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.8.0 (2025-11-01)
+
+Full Changelog: [v1.7.0...v1.8.0](https://github.com/tzafon/computer-typescript/compare/v1.7.0...v1.8.0)
+
+### Features
+
+* add get html tag ([15f3d66](https://github.com/tzafon/computer-typescript/commit/15f3d664e908ab760ea5eee4180a5bd41bdc5ed3))
+
 ## 1.7.0 (2025-10-30)
 
 Full Changelog: [v1.6.1...v1.7.0](https://github.com/tzafon/computer-typescript/compare/v1.6.1...v1.7.0)
