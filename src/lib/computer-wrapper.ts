@@ -72,6 +72,12 @@ export class ComputerInstance {
     });
   }
 
+  async getHTML(auto_detect_encoding?: boolean): Promise<ActionResult> {
+    return this.client.computers.executeAction(this.id, {
+      body: { action: { type: 'get_html_content', auto_detect_encoding } },
+    });
+  }
+
   async wait(seconds: number): Promise<ActionResult> {
     return this.client.computers.executeAction(this.id, {
       body: { action: { type: 'wait', ms: seconds * 1000 } },
