@@ -34,6 +34,59 @@ export class Computers extends APIResource {
   }
 
   /**
+   * Take a screenshot of the current browser viewport, optionally as base64
+   */
+  captureScreenshot(
+    id: string,
+    body: ComputerCaptureScreenshotParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/screenshot`, { body, ...options });
+  }
+
+  /**
+   * Perform a left mouse click at the specified x,y coordinates
+   */
+  click(id: string, body: ComputerClickParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/click`, { body, ...options });
+  }
+
+  /**
+   * Establish WebSocket for real-time bidirectional communication
+   */
+  connectWebsocket(id: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.get(path`/computers/${id}/ws`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Execute a shell command with optional timeout and output length limits
+   */
+  debug(id: string, body: ComputerDebugParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/debug`, { body, ...options });
+  }
+
+  /**
+   * Perform a double mouse click at the specified x,y coordinates
+   */
+  doubleClick(
+    id: string,
+    body: ComputerDoubleClickParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/double-click`, { body, ...options });
+  }
+
+  /**
+   * Perform a click-and-drag action from (x1,y1) to (x2,y2)
+   */
+  drag(id: string, body: ComputerDragParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/drag`, { body, ...options });
+  }
+
+  /**
    * Execute a single action such as screenshot, click, type, navigate, scroll,
    * debug, set_viewport, get_html_content or other computer use actions
    */
@@ -57,6 +110,17 @@ export class Computers extends APIResource {
   }
 
   /**
+   * Get the HTML content of the current browser page
+   */
+  getHTML(
+    id: string,
+    body: ComputerGetHTMLParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/html`, { body, ...options });
+  }
+
+  /**
    * Extend the timeout for a computer session and verify it is still running
    */
   keepAlive(id: string, options?: RequestOptions): APIPromise<ComputerKeepAliveResponse> {
@@ -71,10 +135,61 @@ export class Computers extends APIResource {
   }
 
   /**
+   * Press a combination of keys (e.g., ["Control", "c"] for copy)
+   */
+  pressHotkey(
+    id: string,
+    body: ComputerPressHotkeyParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/hotkey`, { body, ...options });
+  }
+
+  /**
+   * Perform a right mouse click at the specified x,y coordinates
+   */
+  rightClick(id: string, body: ComputerRightClickParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/right-click`, { body, ...options });
+  }
+
+  /**
+   * Scroll the browser viewport by the specified delta
+   */
+  scrollViewport(
+    id: string,
+    body: ComputerScrollViewportParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/scroll`, { body, ...options });
+  }
+
+  /**
+   * Change the browser viewport dimensions and scale factor
+   */
+  setViewport(
+    id: string,
+    body: ComputerSetViewportParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/viewport`, { body, ...options });
+  }
+
+  /**
    * Stream real-time events using Server-Sent Events (SSE)
    */
   streamEvents(id: string, options?: RequestOptions): APIPromise<void> {
     return this._client.get(path`/computers/${id}/events`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Stream only screencast frames (base64 JPEG images) using Server-Sent Events
+   * (SSE) for live browser viewing
+   */
+  streamScreencast(id: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.get(path`/computers/${id}/screencast`, {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
@@ -89,6 +204,13 @@ export class Computers extends APIResource {
       ...options,
       headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
     });
+  }
+
+  /**
+   * Type text into the currently focused element in the browser
+   */
+  typeText(id: string, body: ComputerTypeTextParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/type`, { body, ...options });
   }
 }
 
@@ -160,6 +282,40 @@ export namespace ComputerCreateParams {
 
     width?: number;
   }
+}
+
+export interface ComputerCaptureScreenshotParams {
+  base64?: boolean;
+}
+
+export interface ComputerClickParams {
+  x?: number;
+
+  y?: number;
+}
+
+export interface ComputerDebugParams {
+  command?: string;
+
+  max_output_length?: number;
+
+  timeout_seconds?: number;
+}
+
+export interface ComputerDoubleClickParams {
+  x?: number;
+
+  y?: number;
+}
+
+export interface ComputerDragParams {
+  x1?: number;
+
+  x2?: number;
+
+  y1?: number;
+
+  y2?: number;
 }
 
 export interface ComputerExecuteActionParams {
@@ -320,8 +476,44 @@ export namespace ComputerExecuteBatchParams {
   }
 }
 
+export interface ComputerGetHTMLParams {
+  auto_detect_encoding?: boolean;
+}
+
 export interface ComputerNavigateParams {
   url?: string;
+}
+
+export interface ComputerPressHotkeyParams {
+  keys?: Array<string>;
+}
+
+export interface ComputerRightClickParams {
+  x?: number;
+
+  y?: number;
+}
+
+export interface ComputerScrollViewportParams {
+  dx?: number;
+
+  dy?: number;
+
+  x?: number;
+
+  y?: number;
+}
+
+export interface ComputerSetViewportParams {
+  height?: number;
+
+  scale_factor?: number;
+
+  width?: number;
+}
+
+export interface ComputerTypeTextParams {
+  text?: string;
 }
 
 export declare namespace Computers {
@@ -332,8 +524,19 @@ export declare namespace Computers {
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
     type ComputerCreateParams as ComputerCreateParams,
+    type ComputerCaptureScreenshotParams as ComputerCaptureScreenshotParams,
+    type ComputerClickParams as ComputerClickParams,
+    type ComputerDebugParams as ComputerDebugParams,
+    type ComputerDoubleClickParams as ComputerDoubleClickParams,
+    type ComputerDragParams as ComputerDragParams,
     type ComputerExecuteActionParams as ComputerExecuteActionParams,
     type ComputerExecuteBatchParams as ComputerExecuteBatchParams,
+    type ComputerGetHTMLParams as ComputerGetHTMLParams,
     type ComputerNavigateParams as ComputerNavigateParams,
+    type ComputerPressHotkeyParams as ComputerPressHotkeyParams,
+    type ComputerRightClickParams as ComputerRightClickParams,
+    type ComputerScrollViewportParams as ComputerScrollViewportParams,
+    type ComputerSetViewportParams as ComputerSetViewportParams,
+    type ComputerTypeTextParams as ComputerTypeTextParams,
   };
 }
