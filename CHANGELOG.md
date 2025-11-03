@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.11.0 (2025-11-03)
+
+Full Changelog: [v1.10.1...v1.11.0](https://github.com/tzafon/computer-typescript/compare/v1.10.1...v1.11.0)
+
+### Features
+
+* add wait ([fa3ef53](https://github.com/tzafon/computer-typescript/commit/fa3ef535e7da56d4eb6cf3988e0109b889911850))
+
 ## 1.10.1 (2025-11-03)
 
 Full Changelog: [v1.10.0...v1.10.1](https://github.com/tzafon/computer-typescript/compare/v1.10.0...v1.10.1)
