@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.9.0 (2025-11-03)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/tzafon/computer-typescript/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** api update ([d05a980](https://github.com/tzafon/computer-typescript/commit/d05a9801b9a330185092520aa0d42e130cd458a7))
+
+
+### Chores
+
+* remove custom code ([7e4047a](https://github.com/tzafon/computer-typescript/commit/7e4047aef5e1731eb1e3f882635f0e702dbbe24e))
+
 ## 1.8.0 (2025-11-01)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/tzafon/computer-typescript/compare/v1.7.0...v1.8.0)
