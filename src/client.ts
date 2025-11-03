@@ -726,28 +726,6 @@ export class Computer {
   static toFile = Uploads.toFile;
 
   computers: API.Computers = new API.Computers(this);
-
-  /**
-   * Create a computer instance for immediate execution.
-   * Returns a wrapper with methods for browser/desktop automation.
-   */
-  async create(params?: ComputerCreateParams): Promise<import('./lib/computer-wrapper').ComputerInstance> {
-    const { ComputerWrapper } = await import('./lib/computer-wrapper');
-    const wrapper = new ComputerWrapper(this);
-    return wrapper.create(params);
-  }
-
-  /**
-   * Create a computer instance for queued/batch execution.
-   * Actions are queued and executed when you call execute().
-   */
-  async createAsync(
-    params?: ComputerCreateParams,
-  ): Promise<import('./lib/computer-wrapper').QueuedComputerInstance> {
-    const { AsyncComputerWrapper } = await import('./lib/computer-wrapper');
-    const wrapper = new AsyncComputerWrapper(this);
-    return wrapper.create(params);
-  }
 }
 
 Computer.Computers = Computers;
