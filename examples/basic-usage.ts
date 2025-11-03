@@ -32,6 +32,9 @@ async function main() {
     // Type some text
     await computer.type('hello world');
 
+    // Wait for 1 second
+    await computer.wait(1);
+
     // Scroll down
     await computer.scroll(0, 100);
   } finally {
