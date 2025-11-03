@@ -26,6 +26,7 @@ describe('resource computers', () => {
     await expect(
       client.computers.create(
         {
+          auto_kill: true,
           context_id: 'context_id',
           display: { height: 0, scale: 0, width: 0 },
           kind: 'kind',
@@ -62,8 +63,8 @@ describe('resource computers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('executeAction: only required params', async () => {
-    const responsePromise = client.computers.executeAction('id', { body: {} });
+  test.skip('executeAction', async () => {
+    const responsePromise = client.computers.executeAction('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,13 +75,8 @@ describe('resource computers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('executeAction: required and optional params', async () => {
-    const response = await client.computers.executeAction('id', { body: {} });
-  });
-
-  // Prism tests are disabled
-  test.skip('executeBatch: only required params', async () => {
-    const responsePromise = client.computers.executeBatch('id', { body: {} });
+  test.skip('executeBatch', async () => {
+    const responsePromise = client.computers.executeBatch('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -88,11 +84,6 @@ describe('resource computers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('executeBatch: required and optional params', async () => {
-    const response = await client.computers.executeBatch('id', { body: {} });
   });
 
   // Prism tests are disabled
@@ -108,8 +99,8 @@ describe('resource computers', () => {
   });
 
   // Prism tests are disabled
-  test.skip('navigate: only required params', async () => {
-    const responsePromise = client.computers.navigate('id', { body: {} });
+  test.skip('navigate', async () => {
+    const responsePromise = client.computers.navigate('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -117,11 +108,6 @@ describe('resource computers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('navigate: required and optional params', async () => {
-    const response = await client.computers.navigate('id', { body: {} });
   });
 
   // Prism tests are disabled
