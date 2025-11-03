@@ -34,16 +34,15 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Execute a single action such as screenshot, click, type, navigate, scroll, debug
-   * or other computer use actions
+   * Execute a single action such as screenshot, click, type, navigate, scroll,
+   * debug, set_viewport, get_html_content or other computer use actions
    */
   executeAction(
     id: string,
-    params: ComputerExecuteActionParams,
+    body: ComputerExecuteActionParams,
     options?: RequestOptions,
   ): APIPromise<ActionResult> {
-    const { body } = params;
-    return this._client.post(path`/computers/${id}/execute`, { body: body, ...options });
+    return this._client.post(path`/computers/${id}/execute`, { body, ...options });
   }
 
   /**
@@ -51,11 +50,10 @@ export class Computers extends APIResource {
    */
   executeBatch(
     id: string,
-    params: ComputerExecuteBatchParams,
+    body: ComputerExecuteBatchParams,
     options?: RequestOptions,
   ): APIPromise<ComputerExecuteBatchResponse> {
-    const { body } = params;
-    return this._client.post(path`/computers/${id}/batch`, { body: body, ...options });
+    return this._client.post(path`/computers/${id}/batch`, { body, ...options });
   }
 
   /**
@@ -68,9 +66,8 @@ export class Computers extends APIResource {
   /**
    * Navigate the browser to a specified URL
    */
-  navigate(id: string, params: ComputerNavigateParams, options?: RequestOptions): APIPromise<ActionResult> {
-    const { body } = params;
-    return this._client.post(path`/computers/${id}/navigate`, { body: body, ...options });
+  navigate(id: string, body: ComputerNavigateParams, options?: RequestOptions): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/navigate`, { body, ...options });
   }
 
   /**
@@ -126,6 +123,12 @@ export type ComputerExecuteBatchResponse = { [key: string]: unknown };
 export type ComputerKeepAliveResponse = { [key: string]: unknown };
 
 export interface ComputerCreateParams {
+  /**
+   * If true (default), kill session after inactivity. If false, only kill on
+   * explicit stop or max_lifetime
+   */
+  auto_kill?: boolean;
+
   context_id?: string;
 
   /**
@@ -160,15 +163,165 @@ export namespace ComputerCreateParams {
 }
 
 export interface ComputerExecuteActionParams {
-  body: unknown;
+  action?: ComputerExecuteActionParams.Action;
+}
+
+export namespace ComputerExecuteActionParams {
+  export interface Action {
+    /**
+     * For get_html_content
+     */
+    auto_detect_encoding?: boolean;
+
+    /**
+     * For screenshot
+     */
+    base64?: boolean;
+
+    button?: string;
+
+    debug?: Action.Debug;
+
+    /**
+     * For scrolling
+     */
+    dx?: number;
+
+    dy?: number;
+
+    height?: number;
+
+    keys?: Array<string>;
+
+    ms?: number;
+
+    scale_factor?: number;
+
+    text?: string;
+
+    /**
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport
+     */
+    type?: string;
+
+    url?: string;
+
+    /**
+     * For set_viewport
+     */
+    width?: number;
+
+    x?: number;
+
+    /**
+     * For dragging/scrolling
+     */
+    x1?: number;
+
+    /**
+     * For dragging
+     */
+    x2?: number;
+
+    y?: number;
+
+    y1?: number;
+
+    y2?: number;
+  }
+
+  export namespace Action {
+    export interface Debug {
+      command?: string;
+
+      max_output_length?: number;
+
+      timeout_seconds?: number;
+    }
+  }
 }
 
 export interface ComputerExecuteBatchParams {
-  body: unknown;
+  actions?: Array<ComputerExecuteBatchParams.Action>;
+}
+
+export namespace ComputerExecuteBatchParams {
+  export interface Action {
+    /**
+     * For get_html_content
+     */
+    auto_detect_encoding?: boolean;
+
+    /**
+     * For screenshot
+     */
+    base64?: boolean;
+
+    button?: string;
+
+    debug?: Action.Debug;
+
+    /**
+     * For scrolling
+     */
+    dx?: number;
+
+    dy?: number;
+
+    height?: number;
+
+    keys?: Array<string>;
+
+    ms?: number;
+
+    scale_factor?: number;
+
+    text?: string;
+
+    /**
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport
+     */
+    type?: string;
+
+    url?: string;
+
+    /**
+     * For set_viewport
+     */
+    width?: number;
+
+    x?: number;
+
+    /**
+     * For dragging/scrolling
+     */
+    x1?: number;
+
+    /**
+     * For dragging
+     */
+    x2?: number;
+
+    y?: number;
+
+    y1?: number;
+
+    y2?: number;
+  }
+
+  export namespace Action {
+    export interface Debug {
+      command?: string;
+
+      max_output_length?: number;
+
+      timeout_seconds?: number;
+    }
+  }
 }
 
 export interface ComputerNavigateParams {
-  body: unknown;
+  url?: string;
 }
 
 export declare namespace Computers {
