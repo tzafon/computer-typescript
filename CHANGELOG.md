@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.10.1 (2025-11-03)
+
+Full Changelog: [v1.10.0...v1.10.1](https://github.com/tzafon/computer-typescript/compare/v1.10.0...v1.10.1)
+
 ## 1.10.0 (2025-11-03)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/tzafon/computer-typescript/compare/v1.9.0...v1.10.0)
