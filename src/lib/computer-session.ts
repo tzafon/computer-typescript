@@ -1,5 +1,6 @@
 import type { Computer as BaseComputer } from '../client';
 import type * as Computers from '../resources/computers';
+import { sleep } from '../internal/utils/sleep';
 
 /**
  * Result type for screenshot actions
@@ -135,6 +136,22 @@ export class ComputerSession {
     if (x !== undefined) params.x = x;
     if (y !== undefined) params.y = y;
     return this.client.computers.scrollViewport(this.id, params);
+  }
+
+  /**
+   * Wait for a specified number of seconds
+   *
+   * @param seconds - Number of seconds to wait (can be fractional, e.g., 0.5 for half a second)
+   *
+   * @example
+   * ```ts
+   * await computer.wait(1);      // Wait 1 second
+   * await computer.wait(0.5);    // Wait 500 milliseconds
+   * await computer.wait(2.5);    // Wait 2.5 seconds
+   * ```
+   */
+  async wait(seconds: number): Promise<void> {
+    await sleep(seconds * 1000);
   }
 
   /**
