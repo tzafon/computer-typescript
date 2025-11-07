@@ -78,7 +78,11 @@ describe('resource computers', () => {
   test.skip('captureScreenshot: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.computers.captureScreenshot('id', { base64: true }, { path: '/_stainless_unknown_path' }),
+      client.computers.captureScreenshot(
+        'id',
+        { base64: true, tab_id: 'tab_id' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Computer.NotFoundError);
   });
 
@@ -182,7 +186,11 @@ describe('resource computers', () => {
   test.skip('getHTML: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.computers.getHTML('id', { auto_detect_encoding: true }, { path: '/_stainless_unknown_path' }),
+      client.computers.getHTML(
+        'id',
+        { auto_detect_encoding: true, tab_id: 'tab_id' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Computer.NotFoundError);
   });
 
