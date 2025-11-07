@@ -34,7 +34,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Take a screenshot of the current browser viewport, optionally as base64
+   * Take a screenshot of the current browser viewport, optionally as base64.
+   * Optionally specify tab_id to screenshot a specific tab (browser sessions only)
    */
   captureScreenshot(
     id: string,
@@ -45,7 +46,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a left mouse click at the specified x,y coordinates
+   * Perform a left mouse click at the specified x,y coordinates. Optionally specify
+   * tab_id to click on a specific tab (browser sessions only)
    */
   click(id: string, body: ComputerClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/click`, { body, ...options });
@@ -62,14 +64,16 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Execute a shell command with optional timeout and output length limits
+   * Execute a shell command with optional timeout and output length limits.
+   * Optionally specify tab_id (browser sessions only)
    */
   debug(id: string, body: ComputerDebugParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/debug`, { body, ...options });
   }
 
   /**
-   * Perform a double mouse click at the specified x,y coordinates
+   * Perform a double mouse click at the specified x,y coordinates. Optionally
+   * specify tab_id to double-click on a specific tab (browser sessions only)
    */
   doubleClick(
     id: string,
@@ -80,7 +84,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a click-and-drag action from (x1,y1) to (x2,y2)
+   * Perform a click-and-drag action from (x1,y1) to (x2,y2). Optionally specify
+   * tab_id to drag on a specific tab (browser sessions only)
    */
   drag(id: string, body: ComputerDragParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/drag`, { body, ...options });
@@ -110,7 +115,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Get the HTML content of the current browser page
+   * Get the HTML content of the current browser page. Optionally specify tab_id to
+   * get HTML from a specific tab (browser sessions only)
    */
   getHTML(
     id: string,
@@ -128,14 +134,16 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Navigate the browser to a specified URL
+   * Navigate the browser to a specified URL. Optionally specify tab_id to navigate a
+   * specific tab (browser sessions only)
    */
   navigate(id: string, body: ComputerNavigateParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/navigate`, { body, ...options });
   }
 
   /**
-   * Press a combination of keys (e.g., ["Control", "c"] for copy)
+   * Press a combination of keys (e.g., ["Control", "c"] for copy). Optionally
+   * specify tab_id to send hotkey to a specific tab (browser sessions only)
    */
   pressHotkey(
     id: string,
@@ -146,14 +154,16 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a right mouse click at the specified x,y coordinates
+   * Perform a right mouse click at the specified x,y coordinates. Optionally specify
+   * tab_id to right-click on a specific tab (browser sessions only)
    */
   rightClick(id: string, body: ComputerRightClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/right-click`, { body, ...options });
   }
 
   /**
-   * Scroll the browser viewport by the specified delta
+   * Scroll the browser viewport by the specified delta. Optionally specify tab_id to
+   * scroll a specific tab (browser sessions only)
    */
   scrollViewport(
     id: string,
@@ -164,7 +174,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Change the browser viewport dimensions and scale factor
+   * Change the browser viewport dimensions and scale factor. Optionally specify
+   * tab_id to set viewport for a specific tab (browser sessions only)
    */
   setViewport(
     id: string,
@@ -207,7 +218,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Type text into the currently focused element in the browser
+   * Type text into the currently focused element in the browser. Optionally specify
+   * tab_id to type on a specific tab (browser sessions only)
    */
   typeText(id: string, body: ComputerTypeTextParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/type`, { body, ...options });
@@ -286,9 +298,13 @@ export namespace ComputerCreateParams {
 
 export interface ComputerCaptureScreenshotParams {
   base64?: boolean;
+
+  tab_id?: string;
 }
 
 export interface ComputerClickParams {
+  tab_id?: string;
+
   x?: number;
 
   y?: number;
@@ -299,16 +315,22 @@ export interface ComputerDebugParams {
 
   max_output_length?: number;
 
+  tab_id?: string;
+
   timeout_seconds?: number;
 }
 
 export interface ComputerDoubleClickParams {
+  tab_id?: string;
+
   x?: number;
 
   y?: number;
 }
 
 export interface ComputerDragParams {
+  tab_id?: string;
+
   x1?: number;
 
   x2?: number;
@@ -353,10 +375,15 @@ export namespace ComputerExecuteActionParams {
 
     scale_factor?: number;
 
+    /**
+     * For tab management (browser sessions only)
+     */
+    tab_id?: string;
+
     text?: string;
 
     /**
-     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab
      */
     type?: string;
 
@@ -432,10 +459,15 @@ export namespace ComputerExecuteBatchParams {
 
     scale_factor?: number;
 
+    /**
+     * For tab management (browser sessions only)
+     */
+    tab_id?: string;
+
     text?: string;
 
     /**
-     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab
      */
     type?: string;
 
@@ -478,17 +510,25 @@ export namespace ComputerExecuteBatchParams {
 
 export interface ComputerGetHTMLParams {
   auto_detect_encoding?: boolean;
+
+  tab_id?: string;
 }
 
 export interface ComputerNavigateParams {
+  tab_id?: string;
+
   url?: string;
 }
 
 export interface ComputerPressHotkeyParams {
   keys?: Array<string>;
+
+  tab_id?: string;
 }
 
 export interface ComputerRightClickParams {
+  tab_id?: string;
+
   x?: number;
 
   y?: number;
@@ -498,6 +538,8 @@ export interface ComputerScrollViewportParams {
   dx?: number;
 
   dy?: number;
+
+  tab_id?: string;
 
   x?: number;
 
@@ -509,10 +551,14 @@ export interface ComputerSetViewportParams {
 
   scale_factor?: number;
 
+  tab_id?: string;
+
   width?: number;
 }
 
 export interface ComputerTypeTextParams {
+  tab_id?: string;
+
   text?: string;
 }
 
