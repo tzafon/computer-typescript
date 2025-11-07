@@ -353,10 +353,15 @@ export namespace ComputerExecuteActionParams {
 
     scale_factor?: number;
 
+    /**
+     * For tab management (browser sessions only)
+     */
+    tab_id?: string;
+
     text?: string;
 
     /**
-     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab
      */
     type?: string;
 
@@ -432,10 +437,15 @@ export namespace ComputerExecuteBatchParams {
 
     scale_factor?: number;
 
+    /**
+     * For tab management (browser sessions only)
+     */
+    tab_id?: string;
+
     text?: string;
 
     /**
-     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab
      */
     type?: string;
 
