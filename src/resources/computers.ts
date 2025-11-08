@@ -229,6 +229,10 @@ export class Computers extends APIResource {
 export interface ActionResult {
   error_message?: string;
 
+  executed_tab_id?: string;
+
+  page_context?: ActionResult.PageContext;
+
   request_id?: string;
 
   result?: { [key: string]: unknown };
@@ -236,6 +240,32 @@ export interface ActionResult {
   status?: string;
 
   timestamp?: string;
+}
+
+export namespace ActionResult {
+  export interface PageContext {
+    device_scale_factor?: number;
+
+    is_main_tab?: boolean;
+
+    page_height?: number;
+
+    page_width?: number;
+
+    scroll_x?: number;
+
+    scroll_y?: number;
+
+    tab_id?: string;
+
+    title?: string;
+
+    url?: string;
+
+    viewport_height?: number;
+
+    viewport_width?: number;
+  }
 }
 
 export interface ComputerResponse {
@@ -369,6 +399,11 @@ export namespace ComputerExecuteActionParams {
 
     height?: number;
 
+    /**
+     * Include page context in response
+     */
+    include_context?: boolean;
+
     keys?: Array<string>;
 
     ms?: number;
@@ -452,6 +487,11 @@ export namespace ComputerExecuteBatchParams {
     dy?: number;
 
     height?: number;
+
+    /**
+     * Include page context in response
+     */
+    include_context?: boolean;
 
     keys?: Array<string>;
 
