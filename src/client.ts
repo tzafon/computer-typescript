@@ -149,7 +149,7 @@ export class Computer {
    * API Client for interfacing with the Computer API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['TZAFON_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['COMPUTER_BASE_URL'] ?? https://v2.tzafon.ai/v1] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['COMPUTER_BASE_URL'] ?? https://api.tzafon.ai] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -171,7 +171,7 @@ export class Computer {
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `https://v2.tzafon.ai/v1`,
+      baseURL: baseURL || `https://api.tzafon.ai`,
     };
 
     this.baseURL = options.baseURL!;
@@ -217,7 +217,7 @@ export class Computer {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://v2.tzafon.ai/v1';
+    return this.baseURL !== 'https://api.tzafon.ai';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {

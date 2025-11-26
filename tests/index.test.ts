@@ -306,13 +306,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['COMPUTER_BASE_URL'] = ''; // empty
       const client = new Computer({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://v2.tzafon.ai/v1');
+      expect(client.baseURL).toEqual('https://api.tzafon.ai');
     });
 
     test('blank env variable', () => {
       process.env['COMPUTER_BASE_URL'] = '  '; // blank
       const client = new Computer({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://v2.tzafon.ai/v1');
+      expect(client.baseURL).toEqual('https://api.tzafon.ai');
     });
 
     test('in request options', () => {
