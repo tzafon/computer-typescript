@@ -404,6 +404,11 @@ export namespace ComputerExecuteActionParams {
      */
     include_context?: boolean;
 
+    /**
+     * For key_down/key_up
+     */
+    key?: string;
+
     keys?: Array<string>;
 
     ms?: number;
@@ -418,7 +423,7 @@ export namespace ComputerExecuteActionParams {
     text?: string;
 
     /**
-     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab|key_down|key_up|mouse_down|mouse_up
      */
     type?: string;
 
@@ -493,6 +498,11 @@ export namespace ComputerExecuteBatchParams {
      */
     include_context?: boolean;
 
+    /**
+     * For key_down/key_up
+     */
+    key?: string;
+
     keys?: Array<string>;
 
     ms?: number;
@@ -507,7 +517,7 @@ export namespace ComputerExecuteBatchParams {
     text?: string;
 
     /**
-     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab
+     * click|double_click|right_click|drag|type|keypress|scroll|wait|screenshot|go_to_url|debug|get_html_content|set_viewport|list_tabs|new_tab|switch_tab|close_tab|key_down|key_up|mouse_down|mouse_up
      */
     type?: string;
 
