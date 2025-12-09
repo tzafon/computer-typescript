@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Agent } from './agent/agent';
 export {
   Computers,
   type ActionResult,
@@ -27,4 +26,5 @@ export {
   type ComputerScrollViewportParams,
   type ComputerSetViewportParams,
   type ComputerTypeTextParams,
-} from './computers/computers';
+} from './computers';
+export { Tabs, type TabCreateParams, type TabDeleteParams, type TabSwitchParams } from './tabs';

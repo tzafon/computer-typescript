@@ -16,6 +16,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { Agent } from './resources/agent/agent';
 import {
   ActionResult,
   ComputerCaptureScreenshotParams,
@@ -29,7 +30,11 @@ import {
   ComputerExecuteBatchResponse,
   ComputerGetHTMLParams,
   ComputerKeepAliveResponse,
+  ComputerKeyDownParams,
+  ComputerKeyUpParams,
   ComputerListResponse,
+  ComputerMouseDownParams,
+  ComputerMouseUpParams,
   ComputerNavigateParams,
   ComputerPressHotkeyParams,
   ComputerResponse,
@@ -38,7 +43,7 @@ import {
   ComputerSetViewportParams,
   ComputerTypeTextParams,
   Computers,
-} from './resources/computers';
+} from './resources/computers/computers';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -737,9 +742,11 @@ export class Computer {
   static toFile = Uploads.toFile;
 
   computers: API.Computers = new API.Computers(this);
+  agent: API.Agent = new API.Agent(this);
 }
 
 Computer.Computers = Computers;
+Computer.Agent = Agent;
 
 export declare namespace Computer {
   export type RequestOptions = Opts.RequestOptions;
@@ -760,6 +767,10 @@ export declare namespace Computer {
     type ComputerExecuteActionParams as ComputerExecuteActionParams,
     type ComputerExecuteBatchParams as ComputerExecuteBatchParams,
     type ComputerGetHTMLParams as ComputerGetHTMLParams,
+    type ComputerKeyDownParams as ComputerKeyDownParams,
+    type ComputerKeyUpParams as ComputerKeyUpParams,
+    type ComputerMouseDownParams as ComputerMouseDownParams,
+    type ComputerMouseUpParams as ComputerMouseUpParams,
     type ComputerNavigateParams as ComputerNavigateParams,
     type ComputerPressHotkeyParams as ComputerPressHotkeyParams,
     type ComputerRightClickParams as ComputerRightClickParams,
@@ -767,4 +778,6 @@ export declare namespace Computer {
     type ComputerSetViewportParams as ComputerSetViewportParams,
     type ComputerTypeTextParams as ComputerTypeTextParams,
   };
+
+  export { Agent as Agent };
 }
