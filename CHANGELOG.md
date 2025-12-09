@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.15.0 (2025-12-09)
+
+Full Changelog: [v1.14.0...v1.15.0](https://github.com/tzafon/computer-typescript/compare/v1.14.0...v1.15.0)
+
+### Features
+
+* **api:** api update ([9cebfaf](https://github.com/tzafon/computer-typescript/commit/9cebfaf38a9199d278cdd6d3ac8cc58e95e74f4f))
+* **api:** manual updates ([212d6d3](https://github.com/tzafon/computer-typescript/commit/212d6d3d6d4b086a7dc7ecd71e809b37064774e7))
+* **api:** manual updates ([0811b25](https://github.com/tzafon/computer-typescript/commit/0811b25ab40f0bbbc13e4d5f931e0faf34954b06))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([ac65715](https://github.com/tzafon/computer-typescript/commit/ac6571513f7de8cf5c991f290c859059896a829c))
+* **mcp:** return correct lines on typescript errors ([c18d478](https://github.com/tzafon/computer-typescript/commit/c18d4785d02ecd0a0a42e61ba362555135987c98))
+
+
+### Chores
+
+* **client:** fix logger property type ([330cc12](https://github.com/tzafon/computer-typescript/commit/330cc128a4916d5810914a4ca69ed53d1f06dbb5))
+* **internal:** codegen related update ([000a928](https://github.com/tzafon/computer-typescript/commit/000a928e7c85167f33ecbb0ba22b642fdbe41639))
+* **internal:** codegen related update ([fda987b](https://github.com/tzafon/computer-typescript/commit/fda987b7fdc482cee36088688d23acf7c09c0687))
+* **internal:** upgrade eslint ([e1e8041](https://github.com/tzafon/computer-typescript/commit/e1e8041e06e6484423badd34a2e6ce8c15c712c5))
+
 ## 1.14.0 (2025-11-26)
 
 Full Changelog: [v1.13.0...v1.14.0](https://github.com/tzafon/computer-typescript/compare/v1.13.0...v1.14.0)
