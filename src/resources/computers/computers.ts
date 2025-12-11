@@ -450,6 +450,8 @@ export namespace ComputerExecuteActionParams {
 
     ms?: number;
 
+    proxy_url?: string;
+
     scale_factor?: number;
 
     /**
@@ -543,6 +545,8 @@ export namespace ComputerExecuteBatchParams {
     keys?: Array<string>;
 
     ms?: number;
+
+    proxy_url?: string;
 
     scale_factor?: number;
 
