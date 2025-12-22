@@ -1,4 +1,4 @@
 configured_endpoints: 36
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/tzafon%2Fcomputer-67cc092e8875837e822f455af223de23f3c2bf130126605e5febd419f0bbaa82.yml
-openapi_spec_hash: cda7baaacd788d2e37eeed3359227e69
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/tzafon%2Fcomputer-cbb80de06437f6911c655bb14bb916c5f21333275d91dcf3dfab8b9a24dd1ffa.yml
+openapi_spec_hash: a4e21aef56b1eb65344b7983159e4a95
 config_hash: fbc18547e04180e9f23483c07067ce8f

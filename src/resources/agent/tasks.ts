@@ -61,8 +61,24 @@ export class Tasks extends APIResource {
 
   /**
    * Stream real-time updates for an agent task using Server-Sent Events (SSE).
-   * Returns events such as setup progress, agent actions, observations, and task
-   * completion.
+   *
+   * **Standardized Event Types:**
+   *
+   * - `thinking`: Agent's internal thought process (content: thought text)
+   * - `tool_call`: Agent action being executed (content: e.g. "click(x=100, y=200)",
+   *   "finished()")
+   * - `message`: Final response to user (content: response text)
+   * - `error`: Error occurred (content: error message)
+   * - `image`: Generated image (content: image URL)
+   *
+   * **Agent-Specific Events (informational):**
+   *
+   * - `screenshot`: Browser screenshot available
+   * - `setup_start`, `setup_progress`, `setup_complete`: Task initialization
+   * - `computer_session_created`: Browser session ready
+   * - `stream_stopped`: Stream ended (reason: task_completed, no_action, etc.)
+   * - `stream_closed`: Stream closed by server (reason: inactivity_timeout, etc.)
+   * - `keep_alive`: Connection keep-alive ping
    */
   streamUpdates(taskID: string, options?: RequestOptions): APIPromise<Stream<TaskStreamUpdatesResponse>> {
     return this._client.get(path`/agent/tasks/${taskID}/stream`, {
