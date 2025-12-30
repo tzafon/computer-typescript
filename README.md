@@ -26,9 +26,9 @@ const client = new Computer({
   apiKey: process.env['TZAFON_API_KEY'], // This is the default and can be omitted
 });
 
-const computerResponse = await client.computers.create({ kind: 'browser' });
+const computer = await client.computers.create({ kind: 'browser' });
 
-console.log(computerResponse.id);
+console.log(computer.id);
 ```
 
 ### Request & Response types
@@ -44,7 +44,7 @@ const client = new Computer({
 });
 
 const params: Computer.ComputerCreateParams = { kind: 'browser' };
-const computerResponse: Computer.ComputerResponse = await client.computers.create(params);
+const computer: Computer.ComputerCreateResponse = await client.computers.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -57,7 +57,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const computerResponse = await client.computers.create({ kind: 'browser' }).catch(async (err) => {
+const computer = await client.computers.create({ kind: 'browser' }).catch(async (err) => {
   if (err instanceof Computer.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -141,11 +141,9 @@ const response = await client.computers.create({ kind: 'browser' }).asResponse()
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: computerResponse, response: raw } = await client.computers
-  .create({ kind: 'browser' })
-  .withResponse();
+const { data: computer, response: raw } = await client.computers.create({ kind: 'browser' }).withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(computerResponse.id);
+console.log(computer.id);
 ```
 
 ### Logging
