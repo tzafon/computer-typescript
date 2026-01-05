@@ -21,9 +21,8 @@ export class Computers extends APIResource {
   tabs: TabsAPI.Tabs = new TabsAPI.Tabs(this._client);
 
   /**
-   * Create a new browser or desktop automation session with configurable timeout.
-   * Returns endpoints for executing actions, streaming events, and viewing
-   * screencast.
+   * Create a new automation session. Set kind to "browser" for web automation or
+   * "desktop" for OS-level automation. Defaults to "browser" if not specified.
    */
   create(
     body: ComputerCreateParams | null | undefined = {},
@@ -59,8 +58,10 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a left mouse click at the specified x,y coordinates. Optionally specify
-   * tab_id (browser sessions only)
+   * Perform a left mouse click at the specified x,y coordinates. Coordinates are
+   * screenshot pixel positions - send exactly what you see in the
+   * screenshot/screencast image. If target is at pixel (500, 300) in the image, send
+   * x=500, y=300. Optionally specify tab_id (browser sessions only)
    */
   click(id: string, body: ComputerClickParams, options?: RequestOptions): APIPromise<ComputerClickResponse> {
     return this._client.post(path`/computers/${id}/click`, { body, ...options });
@@ -85,8 +86,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a double mouse click at the specified x,y coordinates. Optionally
-   * specify tab_id (browser sessions only)
+   * Perform a double mouse click at the specified x,y coordinates. Coordinates are
+   * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
    */
   doubleClick(
     id: string,
@@ -97,8 +98,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a click-and-drag action from (x1,y1) to (x2,y2). Optionally specify
-   * tab_id (browser sessions only)
+   * Perform a click-and-drag action from (x1,y1) to (x2,y2). Coordinates are
+   * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
    */
   drag(id: string, body: ComputerDragParams, options?: RequestOptions): APIPromise<ComputerDragResponse> {
     return this._client.post(path`/computers/${id}/drag`, { body, ...options });
@@ -167,8 +168,9 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Press and hold the left mouse button at the specified coordinates. Optionally
-   * specify tab_id (browser sessions only)
+   * Press and hold the left mouse button at the specified x,y coordinates.
+   * Coordinates are screenshot pixel positions. Optionally specify tab_id (browser
+   * sessions only)
    */
   mouseDown(
     id: string,
@@ -179,8 +181,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Release the left mouse button at the specified coordinates. Optionally specify
-   * tab_id (browser sessions only)
+   * Release the left mouse button at the specified x,y coordinates. Coordinates are
+   * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
    */
   mouseUp(
     id: string,
@@ -215,8 +217,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Perform a right mouse click at the specified x,y coordinates. Optionally specify
-   * tab_id (browser sessions only)
+   * Perform a right mouse click at the specified x,y coordinates. Coordinates are
+   * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
    */
   rightClick(
     id: string,
@@ -227,8 +229,8 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Scroll the browser viewport by the specified delta. Optionally specify tab_id
-   * (browser sessions only)
+   * Scroll at the specified x,y position by delta dx,dy. Coordinates are screenshot
+   * pixel positions. Optionally specify tab_id (browser sessions only)
    */
   scrollViewport(
     id: string,
@@ -302,9 +304,9 @@ export interface ComputerCreateResponse {
 
   endpoints?: { [key: string]: string };
 
-  status?: string;
+  kind?: string;
 
-  type?: string;
+  status?: string;
 }
 
 export interface ComputerRetrieveResponse {
@@ -314,9 +316,9 @@ export interface ComputerRetrieveResponse {
 
   endpoints?: { [key: string]: string };
 
-  status?: string;
+  kind?: string;
 
-  type?: string;
+  status?: string;
 }
 
 export type ComputerListResponse = Array<ComputerListResponse.ComputerListResponseItem>;
@@ -329,9 +331,9 @@ export namespace ComputerListResponse {
 
     endpoints?: { [key: string]: string };
 
-    status?: string;
+    kind?: string;
 
-    type?: string;
+    status?: string;
   }
 }
 
@@ -1064,7 +1066,7 @@ export interface ComputerCreateParams {
   display?: ComputerCreateParams.Display;
 
   /**
-   * "browser"|"desktop"|"code" etc
+   * "browser" (default) or "desktop"
    */
   kind?: string;
 
