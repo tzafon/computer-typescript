@@ -28,7 +28,11 @@ describe('resource computers', () => {
         {
           auto_kill: true,
           context_id: 'context_id',
-          display: { height: 0, scale: 0, width: 0 },
+          display: {
+            height: 0,
+            scale: 0,
+            width: 0,
+          },
           kind: 'kind',
           stealth: {},
           timeout_seconds: 0,

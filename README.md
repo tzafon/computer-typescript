@@ -141,7 +141,9 @@ const response = await client.computers.create({ kind: 'browser' }).asResponse()
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: computer, response: raw } = await client.computers.create({ kind: 'browser' }).withResponse();
+const { data: computer, response: raw } = await client.computers
+  .create({ kind: 'browser' })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(computer.id);
 ```
