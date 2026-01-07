@@ -79,7 +79,8 @@ export class Computers extends APIResource {
 
   /**
    * Execute a shell command with optional timeout and output length limits.
-   * Optionally specify tab_id (browser sessions only)
+   * Optionally specify tab_id (browser sessions only). Deprecated: use /exec or
+   * /exec/sync instead.
    */
   debug(id: string, body: ComputerDebugParams, options?: RequestOptions): APIPromise<ComputerDebugResponse> {
     return this._client.post(path`/computers/${id}/debug`, { body, ...options });
@@ -1174,6 +1175,12 @@ export namespace ComputerExecuteActionParams {
 
     proxy_url?: string;
 
+    /**
+     * RequestId is used for correlating streaming output to the originating request.
+     * Set on ActionRequest, not individual action types.
+     */
+    request_id?: string;
+
     scale_factor?: number;
 
     /**
@@ -1218,7 +1225,15 @@ export namespace ComputerExecuteActionParams {
     export interface Debug {
       command?: string;
 
+      cwd?: string;
+
+      env?: { [key: string]: string };
+
       max_output_length?: number;
+
+      request_id?: string;
+
+      stream?: boolean;
 
       timeout_seconds?: number;
     }
@@ -1270,6 +1285,12 @@ export namespace ComputerExecuteBatchParams {
 
     proxy_url?: string;
 
+    /**
+     * RequestId is used for correlating streaming output to the originating request.
+     * Set on ActionRequest, not individual action types.
+     */
+    request_id?: string;
+
     scale_factor?: number;
 
     /**
@@ -1314,7 +1335,15 @@ export namespace ComputerExecuteBatchParams {
     export interface Debug {
       command?: string;
 
+      cwd?: string;
+
+      env?: { [key: string]: string };
+
       max_output_length?: number;
+
+      request_id?: string;
+
+      stream?: boolean;
 
       timeout_seconds?: number;
     }
