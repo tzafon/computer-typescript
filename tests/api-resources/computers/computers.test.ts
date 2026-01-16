@@ -92,6 +92,18 @@ describe('resource computers', () => {
   });
 
   // Prism tests are disabled
+  test.skip('changeProxy', async () => {
+    const responsePromise = client.computers.changeProxy('id', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
   test.skip('click', async () => {
     const responsePromise = client.computers.click('id', {});
     const rawResponse = await responsePromise.asResponse();
@@ -274,6 +286,18 @@ describe('resource computers', () => {
   // Prism tests are disabled
   test.skip('pressHotkey', async () => {
     const responsePromise = client.computers.pressHotkey('id', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('retrieveStatus', async () => {
+    const responsePromise = client.computers.retrieveStatus('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

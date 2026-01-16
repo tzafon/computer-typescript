@@ -1,17 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as TabsAPI from './tabs';
+import * as ExecAPI from './exec';
 import {
-  TabCreateParams,
-  TabCreateResponse,
-  TabDeleteParams,
-  TabDeleteResponse,
-  TabListResponse,
-  TabSwitchParams,
-  TabSwitchResponse,
-  Tabs,
-} from './tabs';
+  Exec,
+  ExecExecuteParams,
+  ExecExecuteResponse,
+  ExecExecuteSyncParams,
+  ExecExecuteSyncResponse,
+} from './exec';
+import * as TabsAPI from './tabs';
+import { TabCreateParams, TabDeleteParams, TabSwitchParams, Tabs } from './tabs';
 import { APIPromise } from '../../core/api-promise';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
@@ -19,6 +18,7 @@ import { path } from '../../internal/utils/path';
 
 export class Computers extends APIResource {
   tabs: TabsAPI.Tabs = new TabsAPI.Tabs(this._client);
+  exec: ExecAPI.Exec = new ExecAPI.Exec(this._client);
 
   /**
    * Create a new automation session. Set kind to "browser" for web automation or
@@ -30,14 +30,14 @@ export class Computers extends APIResource {
   create(
     body: ComputerCreateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ComputerCreateResponse> {
+  ): APIPromise<ComputerResponse> {
     return this._client.post('/computers', { body, ...options });
   }
 
   /**
    * Get the current status and metadata of a computer instance
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<ComputerRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<ComputerResponse> {
     return this._client.get(path`/computers/${id}`, options);
   }
 
@@ -56,8 +56,19 @@ export class Computers extends APIResource {
     id: string,
     body: ComputerCaptureScreenshotParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ComputerCaptureScreenshotResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/screenshot`, { body, ...options });
+  }
+
+  /**
+   * Change the proxy settings for the browser session
+   */
+  changeProxy(
+    id: string,
+    body: ComputerChangeProxyParams,
+    options?: RequestOptions,
+  ): APIPromise<ActionResult> {
+    return this._client.post(path`/computers/${id}/change-proxy`, { body, ...options });
   }
 
   /**
@@ -66,7 +77,7 @@ export class Computers extends APIResource {
    * screenshot/screencast image. If target is at pixel (500, 300) in the image, send
    * x=500, y=300. Optionally specify tab_id (browser sessions only)
    */
-  click(id: string, body: ComputerClickParams, options?: RequestOptions): APIPromise<ComputerClickResponse> {
+  click(id: string, body: ComputerClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/click`, { body, ...options });
   }
 
@@ -85,7 +96,7 @@ export class Computers extends APIResource {
    * Optionally specify tab_id (browser sessions only). Deprecated: use /exec or
    * /exec/sync instead.
    */
-  debug(id: string, body: ComputerDebugParams, options?: RequestOptions): APIPromise<ComputerDebugResponse> {
+  debug(id: string, body: ComputerDebugParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/debug`, { body, ...options });
   }
 
@@ -97,7 +108,7 @@ export class Computers extends APIResource {
     id: string,
     body: ComputerDoubleClickParams,
     options?: RequestOptions,
-  ): APIPromise<ComputerDoubleClickResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/double-click`, { body, ...options });
   }
 
@@ -105,7 +116,7 @@ export class Computers extends APIResource {
    * Perform a click-and-drag action from (x1,y1) to (x2,y2). Coordinates are
    * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
    */
-  drag(id: string, body: ComputerDragParams, options?: RequestOptions): APIPromise<ComputerDragResponse> {
+  drag(id: string, body: ComputerDragParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/drag`, { body, ...options });
   }
 
@@ -117,7 +128,7 @@ export class Computers extends APIResource {
     id: string,
     body: ComputerExecuteActionParams,
     options?: RequestOptions,
-  ): APIPromise<ComputerExecuteActionResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/execute`, { body, ...options });
   }
 
@@ -140,7 +151,7 @@ export class Computers extends APIResource {
     id: string,
     body: ComputerGetHTMLParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<ComputerGetHTMLResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/html`, { body, ...options });
   }
 
@@ -155,11 +166,7 @@ export class Computers extends APIResource {
    * Press and hold a keyboard key. Use with key_up for complex interactions.
    * Optionally specify tab_id (browser sessions only)
    */
-  keyDown(
-    id: string,
-    body: ComputerKeyDownParams,
-    options?: RequestOptions,
-  ): APIPromise<ComputerKeyDownResponse> {
+  keyDown(id: string, body: ComputerKeyDownParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/key-down`, { body, ...options });
   }
 
@@ -167,7 +174,7 @@ export class Computers extends APIResource {
    * Release a keyboard key that was previously pressed with key_down. Optionally
    * specify tab_id (browser sessions only)
    */
-  keyUp(id: string, body: ComputerKeyUpParams, options?: RequestOptions): APIPromise<ComputerKeyUpResponse> {
+  keyUp(id: string, body: ComputerKeyUpParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/key-up`, { body, ...options });
   }
 
@@ -176,11 +183,7 @@ export class Computers extends APIResource {
    * Coordinates are screenshot pixel positions. Optionally specify tab_id (browser
    * sessions only)
    */
-  mouseDown(
-    id: string,
-    body: ComputerMouseDownParams,
-    options?: RequestOptions,
-  ): APIPromise<ComputerMouseDownResponse> {
+  mouseDown(id: string, body: ComputerMouseDownParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/mouse-down`, { body, ...options });
   }
 
@@ -188,11 +191,7 @@ export class Computers extends APIResource {
    * Release the left mouse button at the specified x,y coordinates. Coordinates are
    * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
    */
-  mouseUp(
-    id: string,
-    body: ComputerMouseUpParams,
-    options?: RequestOptions,
-  ): APIPromise<ComputerMouseUpResponse> {
+  mouseUp(id: string, body: ComputerMouseUpParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/mouse-up`, { body, ...options });
   }
 
@@ -200,11 +199,7 @@ export class Computers extends APIResource {
    * Navigate the browser to a specified URL. Optionally specify tab_id to navigate a
    * specific tab (browser sessions only)
    */
-  navigate(
-    id: string,
-    body: ComputerNavigateParams,
-    options?: RequestOptions,
-  ): APIPromise<ComputerNavigateResponse> {
+  navigate(id: string, body: ComputerNavigateParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/navigate`, { body, ...options });
   }
 
@@ -216,19 +211,22 @@ export class Computers extends APIResource {
     id: string,
     body: ComputerPressHotkeyParams,
     options?: RequestOptions,
-  ): APIPromise<ComputerPressHotkeyResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/hotkey`, { body, ...options });
+  }
+
+  /**
+   * Get current TTLs and last activity metadata for a computer session
+   */
+  retrieveStatus(id: string, options?: RequestOptions): APIPromise<ComputerRetrieveStatusResponse> {
+    return this._client.get(path`/computers/${id}/status`, options);
   }
 
   /**
    * Perform a right mouse click at the specified x,y coordinates. Coordinates are
    * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
    */
-  rightClick(
-    id: string,
-    body: ComputerRightClickParams,
-    options?: RequestOptions,
-  ): APIPromise<ComputerRightClickResponse> {
+  rightClick(id: string, body: ComputerRightClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/right-click`, { body, ...options });
   }
 
@@ -240,7 +238,7 @@ export class Computers extends APIResource {
     id: string,
     body: ComputerScrollViewportParams,
     options?: RequestOptions,
-  ): APIPromise<ComputerScrollViewportResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/scroll`, { body, ...options });
   }
 
@@ -252,7 +250,7 @@ export class Computers extends APIResource {
     id: string,
     body: ComputerSetViewportParams,
     options?: RequestOptions,
-  ): APIPromise<ComputerSetViewportResponse> {
+  ): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/viewport`, { body, ...options });
   }
 
@@ -292,16 +290,28 @@ export class Computers extends APIResource {
    * Type text into the currently focused element in the browser. Optionally specify
    * tab_id (browser sessions only)
    */
-  typeText(
-    id: string,
-    body: ComputerTypeTextParams,
-    options?: RequestOptions,
-  ): APIPromise<ComputerTypeTextResponse> {
+  typeText(id: string, body: ComputerTypeTextParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/type`, { body, ...options });
   }
 }
 
-export interface ComputerCreateResponse {
+export interface ActionResult {
+  error_message?: string;
+
+  executed_tab_id?: string;
+
+  page_context?: V2GoBackendInternalTypesPageContext;
+
+  request_id?: string;
+
+  result?: { [key: string]: unknown };
+
+  status?: string;
+
+  timestamp?: string;
+}
+
+export interface ComputerResponse {
   id?: string;
 
   auto_kill?: boolean;
@@ -325,774 +335,54 @@ export interface ComputerCreateResponse {
   status?: string;
 }
 
-export interface ComputerRetrieveResponse {
-  id?: string;
+export interface V2GoBackendInternalTypesPageContext {
+  device_scale_factor?: number;
 
-  auto_kill?: boolean;
+  is_main_tab?: boolean;
 
-  created_at?: string;
+  page_height?: number;
 
-  endpoints?: { [key: string]: string };
+  page_width?: number;
 
-  expires_at?: string;
+  scroll_x?: number;
 
-  idle_expires_at?: string;
+  scroll_y?: number;
 
-  inactivity_timeout_seconds?: number;
+  tab_id?: string;
 
-  kind?: string;
+  title?: string;
 
-  last_activity_at?: string;
+  url?: string;
 
-  max_lifetime_seconds?: number;
+  viewport_height?: number;
 
-  status?: string;
+  viewport_width?: number;
 }
 
-export type ComputerListResponse = Array<ComputerListResponse.ComputerListResponseItem>;
-
-export namespace ComputerListResponse {
-  export interface ComputerListResponseItem {
-    id?: string;
-
-    auto_kill?: boolean;
-
-    created_at?: string;
-
-    endpoints?: { [key: string]: string };
-
-    expires_at?: string;
-
-    idle_expires_at?: string;
-
-    inactivity_timeout_seconds?: number;
-
-    kind?: string;
-
-    last_activity_at?: string;
-
-    max_lifetime_seconds?: number;
-
-    status?: string;
-  }
-}
-
-export interface ComputerCaptureScreenshotResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerCaptureScreenshotResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerCaptureScreenshotResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerClickResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerClickResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerClickResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerDebugResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerDebugResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerDebugResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerDoubleClickResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerDoubleClickResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerDoubleClickResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerDragResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerDragResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerDragResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerExecuteActionResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerExecuteActionResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerExecuteActionResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
+export type ComputerListResponse = Array<ComputerResponse>;
 
 export type ComputerExecuteBatchResponse = { [key: string]: unknown };
 
-export interface ComputerGetHTMLResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerGetHTMLResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerGetHTMLResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
 export type ComputerKeepAliveResponse = { [key: string]: unknown };
 
-export interface ComputerKeyDownResponse {
-  error_message?: string;
+export interface ComputerRetrieveStatusResponse {
+  id?: string;
 
-  executed_tab_id?: string;
+  auto_kill?: boolean;
 
-  page_context?: ComputerKeyDownResponse.PageContext;
+  created_at?: string;
 
-  request_id?: string;
+  expires_at?: string;
 
-  result?: { [key: string]: unknown };
+  idle_expires_at?: string;
 
-  status?: string;
+  inactivity_timeout_seconds?: number;
 
-  timestamp?: string;
-}
+  last_activity_at?: string;
 
-export namespace ComputerKeyDownResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerKeyUpResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerKeyUpResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
+  max_lifetime_seconds?: number;
 
   status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerKeyUpResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerMouseDownResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerMouseDownResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerMouseDownResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerMouseUpResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerMouseUpResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerMouseUpResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerNavigateResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerNavigateResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerNavigateResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerPressHotkeyResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerPressHotkeyResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerPressHotkeyResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerRightClickResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerRightClickResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerRightClickResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerScrollViewportResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerScrollViewportResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerScrollViewportResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerSetViewportResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerSetViewportResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerSetViewportResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface ComputerTypeTextResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: ComputerTypeTextResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace ComputerTypeTextResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
 }
 
 export interface ComputerCreateParams {
@@ -1134,6 +424,10 @@ export interface ComputerCaptureScreenshotParams {
   base64?: boolean;
 
   tab_id?: string;
+}
+
+export interface ComputerChangeProxyParams {
+  proxy_url?: string;
 }
 
 export interface ComputerClickParams {
@@ -1477,33 +771,20 @@ export interface ComputerTypeTextParams {
 }
 
 Computers.Tabs = Tabs;
+Computers.Exec = Exec;
 
 export declare namespace Computers {
   export {
-    type ComputerCreateResponse as ComputerCreateResponse,
-    type ComputerRetrieveResponse as ComputerRetrieveResponse,
+    type ActionResult as ActionResult,
+    type ComputerResponse as ComputerResponse,
+    type V2GoBackendInternalTypesPageContext as V2GoBackendInternalTypesPageContext,
     type ComputerListResponse as ComputerListResponse,
-    type ComputerCaptureScreenshotResponse as ComputerCaptureScreenshotResponse,
-    type ComputerClickResponse as ComputerClickResponse,
-    type ComputerDebugResponse as ComputerDebugResponse,
-    type ComputerDoubleClickResponse as ComputerDoubleClickResponse,
-    type ComputerDragResponse as ComputerDragResponse,
-    type ComputerExecuteActionResponse as ComputerExecuteActionResponse,
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
-    type ComputerGetHTMLResponse as ComputerGetHTMLResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
-    type ComputerKeyDownResponse as ComputerKeyDownResponse,
-    type ComputerKeyUpResponse as ComputerKeyUpResponse,
-    type ComputerMouseDownResponse as ComputerMouseDownResponse,
-    type ComputerMouseUpResponse as ComputerMouseUpResponse,
-    type ComputerNavigateResponse as ComputerNavigateResponse,
-    type ComputerPressHotkeyResponse as ComputerPressHotkeyResponse,
-    type ComputerRightClickResponse as ComputerRightClickResponse,
-    type ComputerScrollViewportResponse as ComputerScrollViewportResponse,
-    type ComputerSetViewportResponse as ComputerSetViewportResponse,
-    type ComputerTypeTextResponse as ComputerTypeTextResponse,
+    type ComputerRetrieveStatusResponse as ComputerRetrieveStatusResponse,
     type ComputerCreateParams as ComputerCreateParams,
     type ComputerCaptureScreenshotParams as ComputerCaptureScreenshotParams,
+    type ComputerChangeProxyParams as ComputerChangeProxyParams,
     type ComputerClickParams as ComputerClickParams,
     type ComputerDebugParams as ComputerDebugParams,
     type ComputerDoubleClickParams as ComputerDoubleClickParams,
@@ -1525,12 +806,16 @@ export declare namespace Computers {
 
   export {
     Tabs as Tabs,
-    type TabCreateResponse as TabCreateResponse,
-    type TabListResponse as TabListResponse,
-    type TabDeleteResponse as TabDeleteResponse,
-    type TabSwitchResponse as TabSwitchResponse,
     type TabCreateParams as TabCreateParams,
     type TabDeleteParams as TabDeleteParams,
     type TabSwitchParams as TabSwitchParams,
+  };
+
+  export {
+    Exec as Exec,
+    type ExecExecuteResponse as ExecExecuteResponse,
+    type ExecExecuteSyncResponse as ExecExecuteSyncResponse,
+    type ExecExecuteParams as ExecExecuteParams,
+    type ExecExecuteSyncParams as ExecExecuteSyncParams,
   };
 }
