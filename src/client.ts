@@ -16,7 +16,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Agent } from './resources/agent/agent';
 import {
   ComputerCaptureScreenshotParams,
   ComputerCaptureScreenshotResponse,
@@ -759,11 +758,9 @@ export class Computer {
   static toFile = Uploads.toFile;
 
   computers: API.Computers = new API.Computers(this);
-  agent: API.Agent = new API.Agent(this);
 }
 
 Computer.Computers = Computers;
-Computer.Agent = Agent;
 
 export declare namespace Computer {
   export type RequestOptions = Opts.RequestOptions;
@@ -812,6 +809,4 @@ export declare namespace Computer {
     type ComputerSetViewportParams as ComputerSetViewportParams,
     type ComputerTypeTextParams as ComputerTypeTextParams,
   };
-
-  export { Agent as Agent };
 }

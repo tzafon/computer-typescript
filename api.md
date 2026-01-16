@@ -69,7 +69,3 @@ Methods:
 - <code title="get /computers/{id}/tabs">client.computers.tabs.<a href="./src/resources/computers/tabs.ts">list</a>(id) -> TabListResponse</code>
 - <code title="delete /computers/{id}/tabs/{tab_id}">client.computers.tabs.<a href="./src/resources/computers/tabs.ts">delete</a>(tabID, { ...params }) -> TabDeleteResponse</code>
 - <code title="post /computers/{id}/tabs/{tab_id}/switch">client.computers.tabs.<a href="./src/resources/computers/tabs.ts">switch</a>(tabID, { ...params }) -> TabSwitchResponse</code>
-
-# Agent
-
-## Tasks
