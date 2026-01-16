@@ -23,6 +23,9 @@ export class Computers extends APIResource {
   /**
    * Create a new automation session. Set kind to "browser" for web automation or
    * "desktop" for OS-level automation. Defaults to "browser" if not specified.
+   * timeout_seconds controls max lifetime, inactivity_timeout_seconds controls idle
+   * timeout, and auto_kill disables only the idle timeout (max lifetime still
+   * applies).
    */
   create(
     body: ComputerCreateParams | null | undefined = {},
@@ -79,7 +82,8 @@ export class Computers extends APIResource {
 
   /**
    * Execute a shell command with optional timeout and output length limits.
-   * Optionally specify tab_id (browser sessions only)
+   * Optionally specify tab_id (browser sessions only). Deprecated: use /exec or
+   * /exec/sync instead.
    */
   debug(id: string, body: ComputerDebugParams, options?: RequestOptions): APIPromise<ComputerDebugResponse> {
     return this._client.post(path`/computers/${id}/debug`, { body, ...options });
@@ -300,11 +304,23 @@ export class Computers extends APIResource {
 export interface ComputerCreateResponse {
   id?: string;
 
+  auto_kill?: boolean;
+
   created_at?: string;
 
   endpoints?: { [key: string]: string };
 
+  expires_at?: string;
+
+  idle_expires_at?: string;
+
+  inactivity_timeout_seconds?: number;
+
   kind?: string;
+
+  last_activity_at?: string;
+
+  max_lifetime_seconds?: number;
 
   status?: string;
 }
@@ -312,11 +328,23 @@ export interface ComputerCreateResponse {
 export interface ComputerRetrieveResponse {
   id?: string;
 
+  auto_kill?: boolean;
+
   created_at?: string;
 
   endpoints?: { [key: string]: string };
 
+  expires_at?: string;
+
+  idle_expires_at?: string;
+
+  inactivity_timeout_seconds?: number;
+
   kind?: string;
+
+  last_activity_at?: string;
+
+  max_lifetime_seconds?: number;
 
   status?: string;
 }
@@ -327,11 +355,23 @@ export namespace ComputerListResponse {
   export interface ComputerListResponseItem {
     id?: string;
 
+    auto_kill?: boolean;
+
     created_at?: string;
 
     endpoints?: { [key: string]: string };
 
+    expires_at?: string;
+
+    idle_expires_at?: string;
+
+    inactivity_timeout_seconds?: number;
+
     kind?: string;
+
+    last_activity_at?: string;
+
+    max_lifetime_seconds?: number;
 
     status?: string;
   }
@@ -1066,6 +1106,11 @@ export interface ComputerCreateParams {
   display?: ComputerCreateParams.Display;
 
   /**
+   * Idle timeout before auto-kill
+   */
+  inactivity_timeout_seconds?: number;
+
+  /**
    * "browser" (default) or "desktop"
    */
   kind?: string;
@@ -1174,6 +1219,12 @@ export namespace ComputerExecuteActionParams {
 
     proxy_url?: string;
 
+    /**
+     * RequestId is used for correlating streaming output to the originating request.
+     * Set on ActionRequest, not individual action types.
+     */
+    request_id?: string;
+
     scale_factor?: number;
 
     /**
@@ -1218,7 +1269,15 @@ export namespace ComputerExecuteActionParams {
     export interface Debug {
       command?: string;
 
+      cwd?: string;
+
+      env?: { [key: string]: string };
+
       max_output_length?: number;
+
+      request_id?: string;
+
+      stream?: boolean;
 
       timeout_seconds?: number;
     }
@@ -1270,6 +1329,12 @@ export namespace ComputerExecuteBatchParams {
 
     proxy_url?: string;
 
+    /**
+     * RequestId is used for correlating streaming output to the originating request.
+     * Set on ActionRequest, not individual action types.
+     */
+    request_id?: string;
+
     scale_factor?: number;
 
     /**
@@ -1314,7 +1379,15 @@ export namespace ComputerExecuteBatchParams {
     export interface Debug {
       command?: string;
 
+      cwd?: string;
+
+      env?: { [key: string]: string };
+
       max_output_length?: number;
+
+      request_id?: string;
+
+      stream?: boolean;
 
       timeout_seconds?: number;
     }
