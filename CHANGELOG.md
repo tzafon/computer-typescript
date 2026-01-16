@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.18.0 (2026-01-16)
+
+Full Changelog: [v1.17.0...v1.18.0](https://github.com/tzafon/computer-typescript/compare/v1.17.0...v1.18.0)
+
+### Features
+
+* **api:** api update ([5d538ef](https://github.com/tzafon/computer-typescript/commit/5d538efe20ec461298bd2bf951cb227d31c2a5e2))
+* **api:** api update ([e0656a3](https://github.com/tzafon/computer-typescript/commit/e0656a33c100efe9f453959d4b3914afdb4c7276))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([03341c1](https://github.com/tzafon/computer-typescript/commit/03341c1ababc9c3f4a6fa54ea0e8ad18fc969449))
+* **internal:** upgrade babel, qs, js-yaml ([4c45495](https://github.com/tzafon/computer-typescript/commit/4c45495ae5496aeb0fd7effd07764db35dc72671))
+
 ## 1.17.0 (2026-01-05)
 
 Full Changelog: [v1.16.0...v1.17.0](https://github.com/tzafon/computer-typescript/compare/v1.16.0...v1.17.0)
