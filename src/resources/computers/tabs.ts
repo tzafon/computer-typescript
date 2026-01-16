@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as ComputersAPI from './computers';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
@@ -14,7 +15,7 @@ export class Tabs extends APIResource {
     id: string,
     body: TabCreateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<TabCreateResponse> {
+  ): APIPromise<ComputersAPI.ActionResult> {
     return this._client.post(path`/computers/${id}/tabs`, { body, ...options });
   }
 
@@ -24,7 +25,7 @@ export class Tabs extends APIResource {
    * devtools:// and chrome:// tabs. Results may be eventually consistent for newly
    * created tabs.
    */
-  list(id: string, options?: RequestOptions): APIPromise<TabListResponse> {
+  list(id: string, options?: RequestOptions): APIPromise<ComputersAPI.ActionResult> {
     return this._client.get(path`/computers/${id}/tabs`, options);
   }
 
@@ -32,7 +33,11 @@ export class Tabs extends APIResource {
    * Close a specific tab by ID. Cannot close the last remaining tab (browser
    * sessions only). Tab IDs come from ListTabs.
    */
-  delete(tabID: string, params: TabDeleteParams, options?: RequestOptions): APIPromise<TabDeleteResponse> {
+  delete(
+    tabID: string,
+    params: TabDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<ComputersAPI.ActionResult> {
     const { id } = params;
     return this._client.delete(path`/computers/${id}/tabs/${tabID}`, options);
   }
@@ -41,177 +46,13 @@ export class Tabs extends APIResource {
    * Switch the main/active tab to a different tab by ID (browser sessions only). Tab
    * IDs come from ListTabs.
    */
-  switch(tabID: string, params: TabSwitchParams, options?: RequestOptions): APIPromise<TabSwitchResponse> {
+  switch(
+    tabID: string,
+    params: TabSwitchParams,
+    options?: RequestOptions,
+  ): APIPromise<ComputersAPI.ActionResult> {
     const { id } = params;
     return this._client.post(path`/computers/${id}/tabs/${tabID}/switch`, options);
-  }
-}
-
-export interface TabCreateResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: TabCreateResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace TabCreateResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface TabListResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: TabListResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace TabListResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface TabDeleteResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: TabDeleteResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace TabDeleteResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
-  }
-}
-
-export interface TabSwitchResponse {
-  error_message?: string;
-
-  executed_tab_id?: string;
-
-  page_context?: TabSwitchResponse.PageContext;
-
-  request_id?: string;
-
-  result?: { [key: string]: unknown };
-
-  status?: string;
-
-  timestamp?: string;
-}
-
-export namespace TabSwitchResponse {
-  export interface PageContext {
-    device_scale_factor?: number;
-
-    is_main_tab?: boolean;
-
-    page_height?: number;
-
-    page_width?: number;
-
-    scroll_x?: number;
-
-    scroll_y?: number;
-
-    tab_id?: string;
-
-    title?: string;
-
-    url?: string;
-
-    viewport_height?: number;
-
-    viewport_width?: number;
   }
 }
 
@@ -235,10 +76,6 @@ export interface TabSwitchParams {
 
 export declare namespace Tabs {
   export {
-    type TabCreateResponse as TabCreateResponse,
-    type TabListResponse as TabListResponse,
-    type TabDeleteResponse as TabDeleteResponse,
-    type TabSwitchResponse as TabSwitchResponse,
     type TabCreateParams as TabCreateParams,
     type TabDeleteParams as TabDeleteParams,
     type TabSwitchParams as TabSwitchParams,

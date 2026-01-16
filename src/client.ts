@@ -16,50 +16,35 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Agent } from './resources/agent/agent';
 import {
+  ActionResult,
   ComputerCaptureScreenshotParams,
-  ComputerCaptureScreenshotResponse,
+  ComputerChangeProxyParams,
   ComputerClickParams,
-  ComputerClickResponse,
   ComputerCreateParams,
-  ComputerCreateResponse,
   ComputerDebugParams,
-  ComputerDebugResponse,
   ComputerDoubleClickParams,
-  ComputerDoubleClickResponse,
   ComputerDragParams,
-  ComputerDragResponse,
   ComputerExecuteActionParams,
-  ComputerExecuteActionResponse,
   ComputerExecuteBatchParams,
   ComputerExecuteBatchResponse,
   ComputerGetHTMLParams,
-  ComputerGetHTMLResponse,
   ComputerKeepAliveResponse,
   ComputerKeyDownParams,
-  ComputerKeyDownResponse,
   ComputerKeyUpParams,
-  ComputerKeyUpResponse,
   ComputerListResponse,
   ComputerMouseDownParams,
-  ComputerMouseDownResponse,
   ComputerMouseUpParams,
-  ComputerMouseUpResponse,
   ComputerNavigateParams,
-  ComputerNavigateResponse,
   ComputerPressHotkeyParams,
-  ComputerPressHotkeyResponse,
-  ComputerRetrieveResponse,
+  ComputerResponse,
+  ComputerRetrieveStatusResponse,
   ComputerRightClickParams,
-  ComputerRightClickResponse,
   ComputerScrollViewportParams,
-  ComputerScrollViewportResponse,
   ComputerSetViewportParams,
-  ComputerSetViewportResponse,
   ComputerTypeTextParams,
-  ComputerTypeTextResponse,
   Computers,
+  V2GoBackendInternalTypesPageContext,
 } from './resources/computers/computers';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -759,41 +744,25 @@ export class Computer {
   static toFile = Uploads.toFile;
 
   computers: API.Computers = new API.Computers(this);
-  agent: API.Agent = new API.Agent(this);
 }
 
 Computer.Computers = Computers;
-Computer.Agent = Agent;
 
 export declare namespace Computer {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
     Computers as Computers,
-    type ComputerCreateResponse as ComputerCreateResponse,
-    type ComputerRetrieveResponse as ComputerRetrieveResponse,
+    type ActionResult as ActionResult,
+    type ComputerResponse as ComputerResponse,
+    type V2GoBackendInternalTypesPageContext as V2GoBackendInternalTypesPageContext,
     type ComputerListResponse as ComputerListResponse,
-    type ComputerCaptureScreenshotResponse as ComputerCaptureScreenshotResponse,
-    type ComputerClickResponse as ComputerClickResponse,
-    type ComputerDebugResponse as ComputerDebugResponse,
-    type ComputerDoubleClickResponse as ComputerDoubleClickResponse,
-    type ComputerDragResponse as ComputerDragResponse,
-    type ComputerExecuteActionResponse as ComputerExecuteActionResponse,
     type ComputerExecuteBatchResponse as ComputerExecuteBatchResponse,
-    type ComputerGetHTMLResponse as ComputerGetHTMLResponse,
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
-    type ComputerKeyDownResponse as ComputerKeyDownResponse,
-    type ComputerKeyUpResponse as ComputerKeyUpResponse,
-    type ComputerMouseDownResponse as ComputerMouseDownResponse,
-    type ComputerMouseUpResponse as ComputerMouseUpResponse,
-    type ComputerNavigateResponse as ComputerNavigateResponse,
-    type ComputerPressHotkeyResponse as ComputerPressHotkeyResponse,
-    type ComputerRightClickResponse as ComputerRightClickResponse,
-    type ComputerScrollViewportResponse as ComputerScrollViewportResponse,
-    type ComputerSetViewportResponse as ComputerSetViewportResponse,
-    type ComputerTypeTextResponse as ComputerTypeTextResponse,
+    type ComputerRetrieveStatusResponse as ComputerRetrieveStatusResponse,
     type ComputerCreateParams as ComputerCreateParams,
     type ComputerCaptureScreenshotParams as ComputerCaptureScreenshotParams,
+    type ComputerChangeProxyParams as ComputerChangeProxyParams,
     type ComputerClickParams as ComputerClickParams,
     type ComputerDebugParams as ComputerDebugParams,
     type ComputerDoubleClickParams as ComputerDoubleClickParams,
@@ -812,6 +781,4 @@ export declare namespace Computer {
     type ComputerSetViewportParams as ComputerSetViewportParams,
     type ComputerTypeTextParams as ComputerTypeTextParams,
   };
-
-  export { Agent as Agent };
 }
