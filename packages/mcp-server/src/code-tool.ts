@@ -13,9 +13,7 @@ For example:
 
 \`\`\`
 async function run(client) {
-  const computerResponse = await client.computers.create({ kind: 'browser' });
-
-  console.log(computerResponse.id);
+  const computerResponses = await client.computers.list();
 }
 \`\`\`
 
