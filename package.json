@@ -1,8 +1,8 @@
 {
-  "name": "tzafon",
+  "name": "computer",
   "version": "1.19.0",
   "description": "The official TypeScript library for the Computer API",
-  "author": "Computer <simon@tzafon.ai>",
+  "author": "Tzafon <simon@tzafon.ai>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
