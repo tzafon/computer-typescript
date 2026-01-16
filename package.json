@@ -1,5 +1,5 @@
 {
-  "name": "tzafon",
+  "name": "@tzafon/computer",
   "version": "1.19.0",
   "description": "The official TypeScript library for the Computer API",
   "author": "Computer <simon@tzafon.ai>",

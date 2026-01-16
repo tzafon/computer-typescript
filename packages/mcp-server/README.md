@@ -23,7 +23,7 @@ For clients with a configuration JSON, it might look something like this:
 ```json
 {
   "mcpServers": {
-    "tzafon_api": {
+    "tzafon_computer_api": {
       "command": "npx",
       "args": ["-y", "tzafon-mcp"],
       "env": {
@@ -90,7 +90,7 @@ A configuration JSON for this server might look like this, assuming the server i
 ```json
 {
   "mcpServers": {
-    "tzafon_api": {
+    "tzafon_computer_api": {
       "url": "http://localhost:3000",
       "headers": {
         "Authorization": "Bearer <auth value>"

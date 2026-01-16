@@ -52,8 +52,8 @@ COPY --from=builder /build/packages/mcp-server/dist ./
 # Copy node_modules from mcp-server (includes all production deps)
 COPY --from=builder /build/packages/mcp-server/node_modules ./node_modules
 
-# Copy the built tzafon into node_modules
-COPY --from=builder /build/dist ./node_modules/tzafon
+# Copy the built @tzafon/computer into node_modules
+COPY --from=builder /build/dist ./node_modules/@tzafon/computer
 
 # Change ownership to nodejs user
 RUN chown -R nodejs:nodejs /app
