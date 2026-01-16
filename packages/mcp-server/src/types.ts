@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Computer from 'tzafon';
+import Computer from '@tzafon/computer';
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 
 type TextContentBlock = {

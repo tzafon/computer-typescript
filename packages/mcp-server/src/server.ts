@@ -7,21 +7,21 @@ import {
   ListToolsRequestSchema,
   SetLevelRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from 'tzafon';
-import Computer from 'tzafon';
+import { ClientOptions } from '@tzafon/computer';
+import Computer from '@tzafon/computer';
 import { codeTool } from './code-tool';
 import docsSearchTool from './docs-search-tool';
 import { McpOptions } from './options';
 import { HandlerFunction, McpTool } from './types';
 
 export { McpOptions } from './options';
-export { ClientOptions } from 'tzafon';
+export { ClientOptions } from '@tzafon/computer';
 
 export const newMcpServer = () =>
   new McpServer(
     {
-      name: 'tzafon_api',
-      version: '1.19.1',
+      name: 'tzafon_computer_api',
+      version: '1.19.2',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
