@@ -33,6 +33,7 @@ describe('resource computers', () => {
             scale: 0,
             width: 0,
           },
+          inactivity_timeout_seconds: 0,
           kind: 'kind',
           stealth: {},
           timeout_seconds: 0,

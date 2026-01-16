@@ -23,6 +23,9 @@ export class Computers extends APIResource {
   /**
    * Create a new automation session. Set kind to "browser" for web automation or
    * "desktop" for OS-level automation. Defaults to "browser" if not specified.
+   * timeout_seconds controls max lifetime, inactivity_timeout_seconds controls idle
+   * timeout, and auto_kill disables only the idle timeout (max lifetime still
+   * applies).
    */
   create(
     body: ComputerCreateParams | null | undefined = {},
@@ -301,11 +304,23 @@ export class Computers extends APIResource {
 export interface ComputerCreateResponse {
   id?: string;
 
+  auto_kill?: boolean;
+
   created_at?: string;
 
   endpoints?: { [key: string]: string };
 
+  expires_at?: string;
+
+  idle_expires_at?: string;
+
+  inactivity_timeout_seconds?: number;
+
   kind?: string;
+
+  last_activity_at?: string;
+
+  max_lifetime_seconds?: number;
 
   status?: string;
 }
@@ -313,11 +328,23 @@ export interface ComputerCreateResponse {
 export interface ComputerRetrieveResponse {
   id?: string;
 
+  auto_kill?: boolean;
+
   created_at?: string;
 
   endpoints?: { [key: string]: string };
 
+  expires_at?: string;
+
+  idle_expires_at?: string;
+
+  inactivity_timeout_seconds?: number;
+
   kind?: string;
+
+  last_activity_at?: string;
+
+  max_lifetime_seconds?: number;
 
   status?: string;
 }
@@ -328,11 +355,23 @@ export namespace ComputerListResponse {
   export interface ComputerListResponseItem {
     id?: string;
 
+    auto_kill?: boolean;
+
     created_at?: string;
 
     endpoints?: { [key: string]: string };
 
+    expires_at?: string;
+
+    idle_expires_at?: string;
+
+    inactivity_timeout_seconds?: number;
+
     kind?: string;
+
+    last_activity_at?: string;
+
+    max_lifetime_seconds?: number;
 
     status?: string;
   }
@@ -1065,6 +1104,11 @@ export interface ComputerCreateParams {
   context_id?: string;
 
   display?: ComputerCreateParams.Display;
+
+  /**
+   * Idle timeout before auto-kill
+   */
+  inactivity_timeout_seconds?: number;
 
   /**
    * "browser" (default) or "desktop"

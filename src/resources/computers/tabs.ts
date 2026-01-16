@@ -7,7 +7,8 @@ import { path } from '../../internal/utils/path';
 
 export class Tabs extends APIResource {
   /**
-   * Create a new tab, optionally navigating to a URL (browser sessions only)
+   * Create a new tab, optionally navigating to a URL. The new tab becomes the main
+   * tab (browser sessions only).
    */
   create(
     id: string,
@@ -18,8 +19,10 @@ export class Tabs extends APIResource {
   }
 
   /**
-   * Get a list of all open tabs with their IDs, URLs, titles, and main tab status
-   * (browser sessions only)
+   * Get a list of open tabs with IDs, URLs, titles, and main tab status (browser
+   * sessions only). Includes external CDP pages (e.g., Playwright). Excludes
+   * devtools:// and chrome:// tabs. Results may be eventually consistent for newly
+   * created tabs.
    */
   list(id: string, options?: RequestOptions): APIPromise<TabListResponse> {
     return this._client.get(path`/computers/${id}/tabs`, options);
@@ -27,7 +30,7 @@ export class Tabs extends APIResource {
 
   /**
    * Close a specific tab by ID. Cannot close the last remaining tab (browser
-   * sessions only)
+   * sessions only). Tab IDs come from ListTabs.
    */
   delete(tabID: string, params: TabDeleteParams, options?: RequestOptions): APIPromise<TabDeleteResponse> {
     const { id } = params;
@@ -35,7 +38,8 @@ export class Tabs extends APIResource {
   }
 
   /**
-   * Switch the main/active tab to a different tab by ID (browser sessions only)
+   * Switch the main/active tab to a different tab by ID (browser sessions only). Tab
+   * IDs come from ListTabs.
    */
   switch(tabID: string, params: TabSwitchParams, options?: RequestOptions): APIPromise<TabSwitchResponse> {
     const { id } = params;
