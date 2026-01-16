@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.19.1 (2026-01-16)
+
+Full Changelog: [v1.19.0...v1.19.1](https://github.com/tzafon/computer-typescript/compare/v1.19.0...v1.19.1)
+
 ## 1.19.0 (2026-01-16)
 
 Full Changelog: [v1.18.0...v1.19.0](https://github.com/tzafon/computer-typescript/compare/v1.18.0...v1.19.0)
