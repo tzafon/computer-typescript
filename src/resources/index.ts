@@ -1,6 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Agent } from './agent/agent';
 export {
   Computers,
   type ComputerCreateResponse,
