@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.20.0 (2026-01-18)
+
+Full Changelog: [v1.19.2...v1.20.0](https://github.com/tzafon/computer-typescript/compare/v1.19.2...v1.20.0)
+
+### Features
+
+* **api:** manual updates ([78a6849](https://github.com/tzafon/computer-typescript/commit/78a684904238a3e9ac35b51d78619724c24d3302))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([33ca7e5](https://github.com/tzafon/computer-typescript/commit/33ca7e5c66ee62dc0e38dd85caae9ad40ac7aac1))
+
 ## 1.19.2 (2026-01-16)
 
 Full Changelog: [v1.19.1...v1.19.2](https://github.com/tzafon/computer-typescript/compare/v1.19.1...v1.19.2)

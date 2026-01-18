@@ -12,7 +12,7 @@
     "url": "git+https://github.com/tzafon/computer-typescript.git"
   },
   "homepage": "https://github.com/tzafon/computer-typescript/tree/main/packages/mcp-server#readme",
-  "documentation": "http://docs.tzafon.ai",
+  "documentation": "https://docs.tzafon.ai",
   "server": {
     "type": "node",
     "entry_point": "index.js",
