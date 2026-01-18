@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.21.0 (2026-01-18)
+
+Full Changelog: [v1.20.0...v1.21.0](https://github.com/tzafon/computer-typescript/compare/v1.20.0...v1.21.0)
+
+### Features
+
+* restore ([fe21234](https://github.com/tzafon/computer-typescript/commit/fe212346e57f424ff1453a2d0fe6ee2a46d36974))
+
 ## 1.20.0 (2026-01-18)
 
 Full Changelog: [v1.19.2...v1.20.0](https://github.com/tzafon/computer-typescript/compare/v1.19.2...v1.20.0)
