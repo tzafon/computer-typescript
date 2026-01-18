@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.21.1 (2026-01-18)
+
+Full Changelog: [v1.21.0...v1.21.1](https://github.com/tzafon/computer-typescript/compare/v1.21.0...v1.21.1)
+
+### Documentation
+
+* update README ([28541dd](https://github.com/tzafon/computer-typescript/commit/28541dddad763f077202234ec31f7e260356a23c))
+
 ## 1.21.0 (2026-01-18)
 
 Full Changelog: [v1.20.0...v1.21.0](https://github.com/tzafon/computer-typescript/compare/v1.20.0...v1.21.0)
