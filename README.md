@@ -1,12 +1,18 @@
-# Computer TypeScript API Library
+# Tzafon TypeScript SDK
 
 [![NPM version](<https://img.shields.io/npm/v/@tzafon/computer.svg?label=npm%20(stable)>)](https://npmjs.org/package/@tzafon/computer) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@tzafon/computer)
 
-This library provides convenient access to the Computer REST API from server-side TypeScript or JavaScript.
+Tzafon is a TypeScript SDK for programmatic browser and desktop automation. Control Chromium browsers and Linux desktop environments with a simple, high-level API.
 
-The REST API documentation can be found on [docs.tzafon.ai](https://docs.tzafon.ai). The full API of this library can be found in [api.md](api.md).
+**Key Features:**
 
-It is generated with [Stainless](https://www.stainless.com/).
+- **Browser Automation** - Navigate, click, type, scroll, and capture screenshots
+- **Desktop Control** - Automate Linux desktop applications and workflows
+- **Multi-Tab Management** - Control multiple browser tabs within a single session
+- **Stealth Mode** - Full stealth capabilities for web automation
+- **Streaming** - Real-time event streaming support
+
+The full documentation is available at [docs.tzafon.ai](https://docs.tzafon.ai). The full API of this library can be found in [api.md](api.md).
 
 ## MCP Server
 
@@ -27,15 +33,91 @@ npm install @tzafon/computer
 
 The full API of this library can be found in [api.md](api.md).
 
+### Quick Start
+
 <!-- prettier-ignore -->
-```js
+```ts
 import Computer from '@tzafon/computer';
 
 const client = new Computer({
   apiKey: process.env['TZAFON_API_KEY'], // This is the default and can be omitted
 });
 
-const computerResponses = await client.computers.list();
+// Create a browser session with automatic cleanup
+await using computer = await client.create({ kind: 'browser' });
+
+// Navigate to a website
+await computer.navigate('https://wikipedia.org');
+await computer.wait(2);
+
+// Interact with the page
+await computer.click(100, 200);
+await computer.type('Ada Lovelace');
+await computer.hotkey(['enter']);
+await computer.wait(1);
+
+// Take a screenshot
+const result = await computer.screenshot();
+console.log('Screenshot URL:', result.result?.screenshot_url);
+
+// Session automatically terminates when scope exits
+```
+
+The `await using` syntax (TypeScript 5.2+) automatically terminates the session when the scope exits. For environments without this support, use try/finally:
+
+<!-- prettier-ignore -->
+```ts
+const computer = await client.create({ kind: 'browser' });
+try {
+  await computer.navigate('https://example.com');
+  // ... your automation code
+} finally {
+  await computer.terminate();
+}
+```
+
+### Session Configuration
+
+You can customize browser and desktop sessions with various options:
+
+<!-- prettier-ignore -->
+```ts
+const computer = await client.create({
+  kind: 'browser', // or 'desktop' for Linux desktop automation
+  timeout_seconds: 3600, // Maximum session duration
+  inactivity_timeout_seconds: 120, // Idle timeout
+  display: { width: 1280, height: 720, scale: 1.0 },
+});
+```
+
+### Available Actions
+
+| Method | Description |
+|--------|-------------|
+| `navigate(url)` | Navigate to a URL (browser only) |
+| `click(x, y)` | Click at coordinates |
+| `doubleClick(x, y)` | Double-click at coordinates |
+| `rightClick(x, y)` | Right-click at coordinates |
+| `type(text)` | Type text into focused element |
+| `hotkey(keys)` | Press keyboard shortcut (e.g., `['Control', 'c']`) |
+| `drag(x1, y1, x2, y2)` | Drag from one point to another |
+| `scroll(dx, dy)` | Scroll the viewport |
+| `screenshot()` | Capture a screenshot |
+| `getHTML()` | Get page HTML content |
+| `wait(seconds)` | Wait for specified seconds |
+| `setViewport(width, height)` | Set viewport dimensions |
+
+### Low-Level API
+
+For more control, you can use the low-level API directly:
+
+<!-- prettier-ignore -->
+```ts
+const session = await client.computers.create({ kind: 'browser' });
+await client.computers.navigate(session.id, { url: 'https://example.com' });
+await client.computers.typeText(session.id, { text: 'Hello' });
+await client.computers.captureScreenshot(session.id, {});
+await client.computers.terminate(session.id);
 ```
 
 ### Request & Response types
