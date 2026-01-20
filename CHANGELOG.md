@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.21.2 (2026-01-20)
+
+Full Changelog: [v1.21.1...v1.21.2](https://github.com/tzafon/computer-typescript/compare/v1.21.1...v1.21.2)
+
+### Chores
+
+* **internal:** codegen related update ([c774248](https://github.com/tzafon/computer-typescript/commit/c774248eead31e5480d5294685bff6455e51b71f))
+* **internal:** codegen related update ([3b611e9](https://github.com/tzafon/computer-typescript/commit/3b611e92eefaed76dd742b23ca3469f15dc2db5c))
+
 ## 1.21.1 (2026-01-18)
 
 Full Changelog: [v1.21.0...v1.21.1](https://github.com/tzafon/computer-typescript/compare/v1.21.0...v1.21.1)
