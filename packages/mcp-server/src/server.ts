@@ -21,7 +21,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'tzafon_lightcone_api',
-      version: '1.21.2',
+      version: '1.21.3',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
