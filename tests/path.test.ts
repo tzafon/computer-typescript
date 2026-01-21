@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from '@tzafon/computer/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from '@tzafon/lightcone/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 
