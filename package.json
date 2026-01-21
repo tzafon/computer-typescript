@@ -1,5 +1,5 @@
 {
-  "name": "@tzafon/computer",
+  "name": "@tzafon/lightcone",
   "version": "1.21.2",
   "private": false,
   "description": "The official TypeScript library for the Computer API",

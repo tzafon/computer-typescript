@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from '@tzafon/computer/internal/uploads';
-import { toFile } from '@tzafon/computer/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@tzafon/lightcone/internal/uploads';
+import { toFile } from '@tzafon/lightcone/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
