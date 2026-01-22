@@ -10,6 +10,13 @@ export class Tabs extends APIResource {
   /**
    * Create a new tab, optionally navigating to a URL. The new tab becomes the main
    * tab (browser sessions only).
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.tabs.create(
+   *   'id',
+   * );
+   * ```
    */
   create(
     id: string,
@@ -24,6 +31,11 @@ export class Tabs extends APIResource {
    * sessions only). Includes external CDP pages (e.g., Playwright). Excludes
    * devtools:// and chrome:// tabs. Results may be eventually consistent for newly
    * created tabs.
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.tabs.list('id');
+   * ```
    */
   list(id: string, options?: RequestOptions): APIPromise<ComputersAPI.ActionResult> {
     return this._client.get(path`/computers/${id}/tabs`, options);
@@ -32,6 +44,14 @@ export class Tabs extends APIResource {
   /**
    * Close a specific tab by ID. Cannot close the last remaining tab (browser
    * sessions only). Tab IDs come from ListTabs.
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.tabs.delete(
+   *   'tab_id',
+   *   { id: 'id' },
+   * );
+   * ```
    */
   delete(
     tabID: string,
@@ -45,6 +65,14 @@ export class Tabs extends APIResource {
   /**
    * Switch the main/active tab to a different tab by ID (browser sessions only). Tab
    * IDs come from ListTabs.
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.tabs.switch(
+   *   'tab_id',
+   *   { id: 'id' },
+   * );
+   * ```
    */
   switch(
     tabID: string,

@@ -26,6 +26,11 @@ export class Computers extends APIResource {
    * timeout_seconds controls max lifetime, inactivity_timeout_seconds controls idle
    * timeout, and auto_kill disables only the idle timeout (max lifetime still
    * applies).
+   *
+   * @example
+   * ```ts
+   * const computerResponse = await client.computers.create();
+   * ```
    */
   create(
     body: ComputerCreateParams | null | undefined = {},
@@ -36,6 +41,13 @@ export class Computers extends APIResource {
 
   /**
    * Get the current status and metadata of a computer instance
+   *
+   * @example
+   * ```ts
+   * const computerResponse = await client.computers.retrieve(
+   *   'id',
+   * );
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<ComputerResponse> {
     return this._client.get(path`/computers/${id}`, options);
@@ -43,6 +55,11 @@ export class Computers extends APIResource {
 
   /**
    * List all active computers for the user's organization
+   *
+   * @example
+   * ```ts
+   * const computerResponses = await client.computers.list();
+   * ```
    */
   list(options?: RequestOptions): APIPromise<ComputerListResponse> {
     return this._client.get('/computers', options);
@@ -51,6 +68,12 @@ export class Computers extends APIResource {
   /**
    * Take a screenshot of the current browser viewport, optionally as base64.
    * Optionally specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult =
+   *   await client.computers.captureScreenshot('id');
+   * ```
    */
   captureScreenshot(
     id: string,
@@ -62,6 +85,13 @@ export class Computers extends APIResource {
 
   /**
    * Change the proxy settings for the browser session
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.changeProxy(
+   *   'id',
+   * );
+   * ```
    */
   changeProxy(
     id: string,
@@ -76,6 +106,11 @@ export class Computers extends APIResource {
    * screenshot pixel positions - send exactly what you see in the
    * screenshot/screencast image. If target is at pixel (500, 300) in the image, send
    * x=500, y=300. Optionally specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.click('id');
+   * ```
    */
   click(id: string, body: ComputerClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/click`, { body, ...options });
@@ -83,6 +118,11 @@ export class Computers extends APIResource {
 
   /**
    * Establish WebSocket for real-time bidirectional communication
+   *
+   * @example
+   * ```ts
+   * await client.computers.connectWebsocket('id');
+   * ```
    */
   connectWebsocket(id: string, options?: RequestOptions): APIPromise<void> {
     return this._client.get(path`/computers/${id}/ws`, {
@@ -95,6 +135,11 @@ export class Computers extends APIResource {
    * Execute a shell command with optional timeout and output length limits.
    * Optionally specify tab_id (browser sessions only). Deprecated: use /exec or
    * /exec/sync instead.
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.debug('id');
+   * ```
    */
   debug(id: string, body: ComputerDebugParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/debug`, { body, ...options });
@@ -103,6 +148,13 @@ export class Computers extends APIResource {
   /**
    * Perform a double mouse click at the specified x,y coordinates. Coordinates are
    * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.doubleClick(
+   *   'id',
+   * );
+   * ```
    */
   doubleClick(
     id: string,
@@ -115,6 +167,11 @@ export class Computers extends APIResource {
   /**
    * Perform a click-and-drag action from (x1,y1) to (x2,y2). Coordinates are
    * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.drag('id');
+   * ```
    */
   drag(id: string, body: ComputerDragParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/drag`, { body, ...options });
@@ -123,6 +180,13 @@ export class Computers extends APIResource {
   /**
    * Execute a single action such as screenshot, click, type, navigate, scroll,
    * debug, set_viewport, get_html_content or other computer use actions
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.executeAction(
+   *   'id',
+   * );
+   * ```
    */
   executeAction(
     id: string,
@@ -134,6 +198,11 @@ export class Computers extends APIResource {
 
   /**
    * Execute a batch of actions in sequence, stopping on first error
+   *
+   * @example
+   * ```ts
+   * const response = await client.computers.executeBatch('id');
+   * ```
    */
   executeBatch(
     id: string,
@@ -146,6 +215,11 @@ export class Computers extends APIResource {
   /**
    * Get the HTML content of the current browser page. Optionally specify tab_id
    * (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.getHTML('id');
+   * ```
    */
   getHTML(
     id: string,
@@ -157,22 +231,52 @@ export class Computers extends APIResource {
 
   /**
    * Extend the timeout for a computer session and verify it is still running
+   *
+   * @example
+   * ```ts
+   * const response = await client.computers.keepAlive('id');
+   * ```
    */
   keepAlive(id: string, options?: RequestOptions): APIPromise<ComputerKeepAliveResponse> {
     return this._client.post(path`/computers/${id}/keepalive`, options);
   }
 
   /**
-   * Press and hold a keyboard key. Use with key_up for complex interactions.
-   * Optionally specify tab_id (browser sessions only)
+   * Press and hold a keyboard key. Use with key_up to release. Supports modifier
+   * keys (shift, ctrl, alt, meta) for complex interactions like Shift+Click.
+   *
+   * **Supported keys:** Modifier keys (shift, ctrl, alt, meta), special keys (enter,
+   * escape, tab, backspace, delete, space), arrow keys (arrowup, arrowdown,
+   * arrowleft, arrowright), navigation (home, end, pageup, pagedown), function keys
+   * (f1-f24), and any single character (a-z, 0-9).
+   *
+   * **Key names are case-insensitive:** "shift", "Shift", and "SHIFT" all work.
+   *
+   * **Example Shift+Click:** 1) key_down "shift", 2) click at coordinates, 3) key_up
+   * "shift"
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.keyDown('id');
+   * ```
    */
   keyDown(id: string, body: ComputerKeyDownParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/key-down`, { body, ...options });
   }
 
   /**
-   * Release a keyboard key that was previously pressed with key_down. Optionally
-   * specify tab_id (browser sessions only)
+   * Release a keyboard key that was previously pressed with key_down. The key name
+   * should match the corresponding key_down call.
+   *
+   * **Key names are case-insensitive:** "shift", "Shift", and "SHIFT" all work.
+   *
+   * **Important:** Always release modifier keys after use to prevent them from
+   * affecting subsequent actions.
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.keyUp('id');
+   * ```
    */
   keyUp(id: string, body: ComputerKeyUpParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/key-up`, { body, ...options });
@@ -182,6 +286,11 @@ export class Computers extends APIResource {
    * Press and hold the left mouse button at the specified x,y coordinates.
    * Coordinates are screenshot pixel positions. Optionally specify tab_id (browser
    * sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.mouseDown('id');
+   * ```
    */
   mouseDown(id: string, body: ComputerMouseDownParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/mouse-down`, { body, ...options });
@@ -190,6 +299,11 @@ export class Computers extends APIResource {
   /**
    * Release the left mouse button at the specified x,y coordinates. Coordinates are
    * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.mouseUp('id');
+   * ```
    */
   mouseUp(id: string, body: ComputerMouseUpParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/mouse-up`, { body, ...options });
@@ -198,6 +312,11 @@ export class Computers extends APIResource {
   /**
    * Navigate the browser to a specified URL. Optionally specify tab_id to navigate a
    * specific tab (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.navigate('id');
+   * ```
    */
   navigate(id: string, body: ComputerNavigateParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/navigate`, { body, ...options });
@@ -206,6 +325,13 @@ export class Computers extends APIResource {
   /**
    * Press a combination of keys (e.g., ["Control", "c"] for copy). Optionally
    * specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.pressHotkey(
+   *   'id',
+   * );
+   * ```
    */
   pressHotkey(
     id: string,
@@ -217,6 +343,13 @@ export class Computers extends APIResource {
 
   /**
    * Get current TTLs and last activity metadata for a computer session
+   *
+   * @example
+   * ```ts
+   * const response = await client.computers.retrieveStatus(
+   *   'id',
+   * );
+   * ```
    */
   retrieveStatus(id: string, options?: RequestOptions): APIPromise<ComputerRetrieveStatusResponse> {
     return this._client.get(path`/computers/${id}/status`, options);
@@ -225,6 +358,13 @@ export class Computers extends APIResource {
   /**
    * Perform a right mouse click at the specified x,y coordinates. Coordinates are
    * screenshot pixel positions. Optionally specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.rightClick(
+   *   'id',
+   * );
+   * ```
    */
   rightClick(id: string, body: ComputerRightClickParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/right-click`, { body, ...options });
@@ -233,6 +373,13 @@ export class Computers extends APIResource {
   /**
    * Scroll at the specified x,y position by delta dx,dy. Coordinates are screenshot
    * pixel positions. Optionally specify tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.scrollViewport(
+   *   'id',
+   * );
+   * ```
    */
   scrollViewport(
     id: string,
@@ -245,6 +392,13 @@ export class Computers extends APIResource {
   /**
    * Change the browser viewport dimensions and scale factor. Optionally specify
    * tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.setViewport(
+   *   'id',
+   * );
+   * ```
    */
   setViewport(
     id: string,
@@ -256,6 +410,11 @@ export class Computers extends APIResource {
 
   /**
    * Stream real-time events using Server-Sent Events (SSE)
+   *
+   * @example
+   * ```ts
+   * await client.computers.streamEvents('id');
+   * ```
    */
   streamEvents(id: string, options?: RequestOptions): APIPromise<void> {
     return this._client.get(path`/computers/${id}/events`, {
@@ -267,6 +426,11 @@ export class Computers extends APIResource {
   /**
    * Stream only screencast frames (base64 JPEG images) using Server-Sent Events
    * (SSE) for live browser viewing
+   *
+   * @example
+   * ```ts
+   * await client.computers.streamScreencast('id');
+   * ```
    */
   streamScreencast(id: string, options?: RequestOptions): APIPromise<void> {
     return this._client.get(path`/computers/${id}/screencast`, {
@@ -278,6 +442,11 @@ export class Computers extends APIResource {
   /**
    * Terminate and clean up a computer instance, stopping the session and recording
    * metrics
+   *
+   * @example
+   * ```ts
+   * await client.computers.terminate('id');
+   * ```
    */
   terminate(id: string, options?: RequestOptions): APIPromise<void> {
     return this._client.delete(path`/computers/${id}`, {
@@ -289,6 +458,11 @@ export class Computers extends APIResource {
   /**
    * Type text into the currently focused element in the browser. Optionally specify
    * tab_id (browser sessions only)
+   *
+   * @example
+   * ```ts
+   * const actionResult = await client.computers.typeText('id');
+   * ```
    */
   typeText(id: string, body: ComputerTypeTextParams, options?: RequestOptions): APIPromise<ActionResult> {
     return this._client.post(path`/computers/${id}/type`, { body, ...options });
@@ -695,14 +869,26 @@ export interface ComputerGetHTMLParams {
 }
 
 export interface ComputerKeyDownParams {
+  /**
+   * Key name to press. Case-insensitive. Examples: "shift", "ctrl", "a", "Enter"
+   */
   key?: string;
 
+  /**
+   * Optional tab ID for browser sessions (ignored for desktop sessions)
+   */
   tab_id?: string;
 }
 
 export interface ComputerKeyUpParams {
+  /**
+   * Key name to release. Case-insensitive. Examples: "shift", "ctrl", "a", "Enter"
+   */
   key?: string;
 
+  /**
+   * Optional tab ID for browser sessions (ignored for desktop sessions)
+   */
   tab_id?: string;
 }
 
