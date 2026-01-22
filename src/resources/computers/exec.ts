@@ -11,6 +11,11 @@ export class Exec extends APIResource {
   /**
    * Execute a shell command with real-time streaming output as NDJSON. Each line is
    * a JSON object with type (stdout/stderr/exit/error).
+   *
+   * @example
+   * ```ts
+   * const response = await client.computers.exec.execute('id');
+   * ```
    */
   execute(
     id: string,
@@ -33,6 +38,13 @@ export class Exec extends APIResource {
   /**
    * Execute a shell command and wait for completion, returning buffered
    * stdout/stderr.
+   *
+   * @example
+   * ```ts
+   * const response = await client.computers.exec.executeSync(
+   *   'id',
+   * );
+   * ```
    */
   executeSync(
     id: string,
