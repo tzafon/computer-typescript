@@ -569,6 +569,8 @@ export interface ComputerCreateParams {
 
   display?: ComputerCreateParams.Display;
 
+  environment_id?: string;
+
   /**
    * Idle timeout before auto-kill
    */
@@ -578,6 +580,11 @@ export interface ComputerCreateParams {
    * "browser" (default) or "desktop"
    */
   kind?: string;
+
+  /**
+   * Persist cookies/storage state to DB on session teardown only if true
+   */
+  persistent?: boolean;
 
   stealth?: unknown;
 
