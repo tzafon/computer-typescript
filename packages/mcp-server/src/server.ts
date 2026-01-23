@@ -7,21 +7,21 @@ import {
   ListToolsRequestSchema,
   SetLevelRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from '@tzafon/lightcone';
-import Computer from '@tzafon/lightcone';
+import { ClientOptions } from '@tzafon/computer';
+import Computer from '@tzafon/computer';
 import { codeTool } from './code-tool';
 import docsSearchTool from './docs-search-tool';
 import { McpOptions } from './options';
 import { HandlerFunction, McpTool } from './types';
 
 export { McpOptions } from './options';
-export { ClientOptions } from '@tzafon/lightcone';
+export { ClientOptions } from '@tzafon/computer';
 
 export const newMcpServer = () =>
   new McpServer(
     {
-      name: 'tzafon_lightcone_api',
-      version: '1.22.0',
+      name: 'tzafon_computer_api',
+      version: '1.22.1',
     },
     { capabilities: { tools: {}, logging: {} } },
   );

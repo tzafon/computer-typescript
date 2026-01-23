@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.22.1 (2026-01-23)
+
+Full Changelog: [v1.22.0...v1.22.1](https://github.com/tzafon/computer-typescript/compare/v1.22.0...v1.22.1)
+
+### Chores
+
+* update SDK settings ([b9999d5](https://github.com/tzafon/computer-typescript/commit/b9999d5853a42d550a652a0228cb1e8a3a648d60))
+* update SDK settings ([b2ad9b2](https://github.com/tzafon/computer-typescript/commit/b2ad9b2549c6c1af914c9cc0947909f51c572acc))
+
 ## 1.22.0 (2026-01-23)
 
 Full Changelog: [v1.21.3...v1.22.0](https://github.com/tzafon/computer-typescript/compare/v1.21.3...v1.22.0)

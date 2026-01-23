@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from '@tzafon/lightcone/core/api-promise';
+import { APIPromise } from '@tzafon/computer/core/api-promise';
 
 import util from 'node:util';
-import Computer from '@tzafon/lightcone';
-import { APIUserAbortError } from '@tzafon/lightcone';
+import Computer from '@tzafon/computer';
+import { APIUserAbortError } from '@tzafon/computer';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

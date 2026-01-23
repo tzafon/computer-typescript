@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Computer } from '@tzafon/lightcone';
+import { Computer } from '@tzafon/computer';
 
 const { stringifyQuery } = Computer.prototype as any;
 
