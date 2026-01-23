@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.22.0 (2026-01-23)
+
+Full Changelog: [v1.21.3...v1.22.0](https://github.com/tzafon/computer-typescript/compare/v1.21.3...v1.22.0)
+
+### Features
+
+* **api:** api update ([750cd29](https://github.com/tzafon/computer-typescript/commit/750cd29d33dec448b954f9f72cda2d4fb06bbaa3))
+* **api:** api update ([a4b10dc](https://github.com/tzafon/computer-typescript/commit/a4b10dc34f90988df0d1d1fcba90e65e9fd3e430))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([9973cee](https://github.com/tzafon/computer-typescript/commit/9973cee8c3b339dfc54664def54390709667f8d5))
+
 ## 1.21.3 (2026-01-21)
 
 Full Changelog: [v1.21.2...v1.21.3](https://github.com/tzafon/computer-typescript/compare/v1.21.2...v1.21.3)
