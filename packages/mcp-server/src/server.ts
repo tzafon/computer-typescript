@@ -21,7 +21,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'tzafon_computer_api',
-      version: '1.21.3',
+      version: '1.22.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
