@@ -4,6 +4,7 @@ import { McpTool, Metadata, ToolCallResult, asErrorResult, asTextContentResult }
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { readEnv, readEnvOrError } from './server';
 import { WorkerInput, WorkerOutput } from './code-tool-types';
+import { Computer } from '@tzafon/computer';
 
 const prompt = `Runs JavaScript code to interact with the Computer API.
 
@@ -52,7 +53,7 @@ export function codeTool(): McpTool {
       required: ['code'],
     },
   };
-  const handler = async (_: unknown, args: any): Promise<ToolCallResult> => {
+  const handler = async (client: Computer, args: any): Promise<ToolCallResult> => {
     const code = args.code as string;
     const intent = args.intent as string | undefined;
 
@@ -68,8 +69,8 @@ export function codeTool(): McpTool {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
         client_envs: JSON.stringify({
-          TZAFON_API_KEY: readEnvOrError('TZAFON_API_KEY'),
-          COMPUTER_BASE_URL: readEnv('COMPUTER_BASE_URL'),
+          TZAFON_API_KEY: readEnvOrError('TZAFON_API_KEY') ?? client.apiKey ?? undefined,
+          COMPUTER_BASE_URL: readEnv('COMPUTER_BASE_URL') ?? client.baseURL ?? undefined,
         }),
       },
       body: JSON.stringify({
