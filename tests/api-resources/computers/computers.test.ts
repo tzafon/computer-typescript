@@ -39,6 +39,7 @@ describe('resource computers', () => {
           persistent: true,
           stealth: {},
           timeout_seconds: 0,
+          use_advanced_proxy: true,
         },
         { path: '/_stainless_unknown_path' },
       ),
