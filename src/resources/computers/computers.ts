@@ -589,6 +589,11 @@ export interface ComputerCreateParams {
   stealth?: unknown;
 
   timeout_seconds?: number;
+
+  /**
+   * If true (browser sessions), use ADVANCED_PROXY_URL on session start
+   */
+  use_advanced_proxy?: boolean;
 }
 
 export namespace ComputerCreateParams {

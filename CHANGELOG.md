@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.23.0 (2026-01-28)
+
+Full Changelog: [v1.22.1...v1.23.0](https://github.com/tzafon/computer-typescript/compare/v1.22.1...v1.23.0)
+
+### Features
+
+* **api:** api update ([04ab040](https://github.com/tzafon/computer-typescript/commit/04ab04060c3b34c3fe8dc267ae0ae8d07b3fad12))
+
+
+### Bug Fixes
+
+* **mcp:** allow falling back for required env variables ([445201a](https://github.com/tzafon/computer-typescript/commit/445201a6a1f797e5bf355558955246596ca261e2))
+
+
+### Chores
+
+* **internal:** codegen related update ([68136e3](https://github.com/tzafon/computer-typescript/commit/68136e365fd3719e5ea430f75b134772cd3c361f))
+
 ## 1.22.1 (2026-01-23)
 
 Full Changelog: [v1.22.0...v1.22.1](https://github.com/tzafon/computer-typescript/compare/v1.22.0...v1.22.1)
