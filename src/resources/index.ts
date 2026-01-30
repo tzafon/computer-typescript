@@ -10,6 +10,7 @@ export {
   type ComputerKeepAliveResponse,
   type ComputerRetrieveStatusResponse,
   type ComputerCreateParams,
+  type ComputerListParams,
   type ComputerCaptureScreenshotParams,
   type ComputerChangeProxyParams,
   type ComputerClickParams,
