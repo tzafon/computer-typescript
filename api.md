@@ -14,7 +14,7 @@ Methods:
 
 - <code title="post /computers">client.computers.<a href="./src/resources/computers/computers.ts">create</a>({ ...params }) -> ComputerResponse</code>
 - <code title="get /computers/{id}">client.computers.<a href="./src/resources/computers/computers.ts">retrieve</a>(id) -> ComputerResponse</code>
-- <code title="get /computers">client.computers.<a href="./src/resources/computers/computers.ts">list</a>() -> ComputerListResponse</code>
+- <code title="get /computers">client.computers.<a href="./src/resources/computers/computers.ts">list</a>({ ...params }) -> ComputerListResponse</code>
 - <code title="post /computers/{id}/screenshot">client.computers.<a href="./src/resources/computers/computers.ts">captureScreenshot</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /computers/{id}/change-proxy">client.computers.<a href="./src/resources/computers/computers.ts">changeProxy</a>(id, { ...params }) -> ActionResult</code>
 - <code title="post /computers/{id}/click">client.computers.<a href="./src/resources/computers/computers.ts">click</a>(id, { ...params }) -> ActionResult</code>

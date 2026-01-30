@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.24.0 (2026-01-30)
+
+Full Changelog: [v1.23.0...v1.24.0](https://github.com/tzafon/computer-typescript/compare/v1.23.0...v1.24.0)
+
+### Features
+
+* **api:** api update ([ebf5e15](https://github.com/tzafon/computer-typescript/commit/ebf5e159a7597554c080a340058c9a8304f741cf))
+
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([dddd535](https://github.com/tzafon/computer-typescript/commit/dddd535cbfc9482796f1ba585894e4512e1e3460))
+* **publish:** use npm registry directly for trusted publishing support ([3287254](https://github.com/tzafon/computer-typescript/commit/32872542996d090aeb07ed6dcbbe4121e1d17c98))
+
+
+### Chores
+
+* **internal:** codegen related update ([3bd9f10](https://github.com/tzafon/computer-typescript/commit/3bd9f10f72b436cd6269391d6b3b663ddd74924c))
+* **mcp:** up tsconfig lib version to es2022 ([7445c7b](https://github.com/tzafon/computer-typescript/commit/7445c7b2ecaf429d377f37595f37c3b6296e9cdc))
+
 ## 1.23.0 (2026-01-28)
 
 Full Changelog: [v1.22.1...v1.23.0](https://github.com/tzafon/computer-typescript/compare/v1.22.1...v1.23.0)

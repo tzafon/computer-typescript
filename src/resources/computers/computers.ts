@@ -54,15 +54,19 @@ export class Computers extends APIResource {
   }
 
   /**
-   * List all active computers for the user's organization
+   * List all active computers for the user's organization. Use type=persistent to
+   * list persistent sessions instead.
    *
    * @example
    * ```ts
    * const computerResponses = await client.computers.list();
    * ```
    */
-  list(options?: RequestOptions): APIPromise<ComputerListResponse> {
-    return this._client.get('/computers', options);
+  list(
+    query: ComputerListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ComputerListResponse> {
+    return this._client.get('/computers', { query, ...options });
   }
 
   /**
@@ -606,6 +610,13 @@ export namespace ComputerCreateParams {
   }
 }
 
+export interface ComputerListParams {
+  /**
+   * Session type filter
+   */
+  type?: 'live' | 'persistent';
+}
+
 export interface ComputerCaptureScreenshotParams {
   base64?: boolean;
 
@@ -981,6 +992,7 @@ export declare namespace Computers {
     type ComputerKeepAliveResponse as ComputerKeepAliveResponse,
     type ComputerRetrieveStatusResponse as ComputerRetrieveStatusResponse,
     type ComputerCreateParams as ComputerCreateParams,
+    type ComputerListParams as ComputerListParams,
     type ComputerCaptureScreenshotParams as ComputerCaptureScreenshotParams,
     type ComputerChangeProxyParams as ComputerChangeProxyParams,
     type ComputerClickParams as ComputerClickParams,
